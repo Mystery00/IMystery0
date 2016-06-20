@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">iMystery0</string>
+    <string name="hint_username">Enter Username</string>
+    <string name="hint_password">Enter Password</string>
+    <string name="button_name1">Log In</string>
+    <string name="button_name2">Register</string>
+    <string name="text1">Remember Me</string>
+    <string name="text2">Forgot Password?</string>
+    <string name="text3">Join us!</string>
+    <string name="feedback_text1">意见反馈</string>
+    <string name="feedback_text2">请输入您遇到的问题:</string>
+    <string name="feedback_text3">请输入您的联系方式:</string>
+    <string name="feed_back_button">提交</string>
+    <string name="music_search">扫描</string>
+    <string name="music_title">音乐播放器</string>
+</resources>

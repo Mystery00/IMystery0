@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logo"
+        android:layout_marginRight="40dp"
+        android:layout_marginEnd="40dp"
+        android:id="@+id/imageView"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/login_edittext_bacgroud"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:id="@+id/username_layout"
+        android:layout_height="40dp">
+
+        <EditText
+            android:layout_width="200dp"
+            android:inputType="textPersonName"
+            android:hint="@string/hint_username"
+            android:id="@+id/username"
+            android:textColor="@color/editText"
+            android:background="@null"
+            android:layout_centerHorizontal="true"
+            android:layout_height="match_parent"
+            android:textColorHint="@color/editText"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/username"
+            android:layout_toLeftOf="@id/username"
+            android:layout_toStartOf="@id/username"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/password_layout"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/login_edittext_bacgroud"
+        android:layout_below="@+id/username_layout"
+        android:layout_height="40dp">
+
+        <EditText
+            android:layout_width="200dp"
+            android:inputType="textPassword"
+            android:hint="@string/hint_password"
+            android:textColor="@color/editText"
+            android:textColorHint="@color/editText"
+            android:background="@null"
+            android:layout_centerHorizontal="true"
+            android:layout_height="match_parent"
+            android:id="@+id/password"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/password"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/password"
+            android:layout_toStartOf="@id/password"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/button_layout"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/password_layout"
+        android:layout_height="40dp">
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:id="@+id/Login_button"
+            android:background="@drawable/login_button_background"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/editText"
+            android:textSize="20sp"
+            android:text="@string/button_name1"
+            android:id="@+id/textView"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_below="@+id/button_layout"
+        android:layout_marginTop="20dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/image_point"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:textSize="20sp"
+            android:textColor="@color/editText"
+            android:layout_toRightOf="@+id/image_point"
+            android:layout_toEndOf="@+id/image_point"
+            android:text="@string/text1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:id="@+id/forgot"
+            android:onClick="forgot"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/editText"
+            android:layout_marginEnd="20dp"
+            android:text="@string/text2"
+            />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text3"
+        android:textSize="20sp"
+        android:id="@+id/intent_register"
+        android:textColor="@color/editText"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+
+</RelativeLayout>
