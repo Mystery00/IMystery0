@@ -43,6 +43,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -93,6 +94,8 @@
         </receiver>
 
         <activity android:name=".Push_Service.pushActivity">
+        </activity>
+        <activity android:name=".Weather.Weather">
         </activity>
     </application>
 
