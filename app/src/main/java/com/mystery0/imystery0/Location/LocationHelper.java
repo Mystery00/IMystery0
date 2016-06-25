@@ -16,14 +16,13 @@ public class LocationHelper implements AMapLocationListener
 {
     private final ILocationCallback callback;
     private AMapLocationClient locationClient;
-    private AMapLocationClientOption locationClientOption;
 
     public LocationHelper(ILocationCallback callback, Context context)
     {
         this.callback = callback;
         locationClient = new AMapLocationClient(context);
         locationClient.setLocationListener(this);
-        locationClientOption = new AMapLocationClientOption();
+        AMapLocationClientOption locationClientOption = new AMapLocationClientOption();
 
         locationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         locationClientOption.setNeedAddress(true);
