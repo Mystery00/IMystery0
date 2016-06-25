@@ -31,7 +31,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:id="@+id/temperature"
-                android:text="tmp"
                 android:textSize="60sp"
                 android:layout_alignParentTop="true"
                 android:layout_toRightOf="@+id/img_weather"
@@ -50,7 +49,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="location"
                 android:textSize="25sp"
                 android:id="@+id/location"
                 android:layout_below="@+id/temperature"
@@ -59,9 +57,9 @@
         </RelativeLayout>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="date"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_height="30dp"
             android:id="@+id/date"
             android:textSize="22sp"
             android:layout_below="@+id/relativeLayout"
@@ -69,10 +67,10 @@
             android:layout_alignStart="@+id/relativeLayout"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="time"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
             android:id="@+id/time"
+            android:layout_marginTop="15dp"
             android:textSize="22sp"
             android:layout_below="@+id/date"
             android:layout_alignLeft="@+id/date"
@@ -80,6 +78,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
             android:layout_height="match_parent"
             android:layout_below="@+id/time">
 
@@ -95,7 +94,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
                     android:id="@+id/time_2"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -110,7 +108,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:id="@+id/tmp_2"
@@ -130,7 +127,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -148,7 +144,6 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="New Text"
                     android:id="@+id/tmp_5"/>
             </LinearLayout>
 
@@ -167,7 +162,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="time"
                     android:id="@+id/time_1"
                     android:layout_weight="1"
                     android:layout_gravity="center"
@@ -182,7 +176,6 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="tmp"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:id="@+id/tmp_1"
@@ -204,7 +197,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -222,7 +214,6 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="New Text"
                     android:id="@+id/tmp_3"/>
             </LinearLayout>
 
@@ -242,7 +233,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -260,7 +250,6 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="New Text"
                     android:id="@+id/tmp_4"/>
             </LinearLayout>
 
@@ -280,7 +269,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="New Text"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
@@ -298,7 +286,6 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:text="New Text"
                     android:id="@+id/tmp_6"/>
             </LinearLayout>
         </RelativeLayout>

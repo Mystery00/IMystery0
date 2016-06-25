@@ -63,6 +63,12 @@
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
+        <activity android:name=".Location.List.City_list">
+        </activity>
+        <activity android:name=".Location.List.District_list">
+        </activity>
+        <activity android:name=".Location.List.Province_list">
+        </activity>
 
         <service android:name=".Music_player.MusicPlayerService">
         </service>
@@ -97,8 +103,6 @@
         </receiver>
 
         <activity android:name=".Push_Service.pushActivity">
-        </activity>
-        <activity android:name=".Weather.Weather">
         </activity>
     </application>
 
