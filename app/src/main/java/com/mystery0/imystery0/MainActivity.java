@@ -289,6 +289,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         /**
          * 读取缓存
          */
+        title.setText(getTemp.getDistrict());
         date.setText(getTemp.getdate());
         time_1.setText(getTemp.getdate_1());
         time_2.setText(getTemp.getdate_2());
@@ -304,6 +305,12 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         tmp_5.setText(getTemp.gettmp_5());
         tmp_6.setText(getTemp.gettmp_6());
         img_code.setImageResource(Get.get(getTemp.getimg_code()));
+        code_1.setImageResource(Get.get(getTemp.getCode_1()));
+        code_2.setImageResource(Get.get(getTemp.getCode_2()));
+        code_3.setImageResource(Get.get(getTemp.getCode_3()));
+        code_4.setImageResource(Get.get(getTemp.getCode_4()));
+        code_5.setImageResource(Get.get(getTemp.getCode_5()));
+        code_6.setImageResource(Get.get(getTemp.getCode_6()));
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, text);
         listView.setAdapter(adapter);
@@ -498,7 +505,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         try
         {
             JSONArray jsonArray = new JSONArray(text);
-            JSONObject jsonObject = jsonArray.getJSONObject(1);
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
             date = jsonObject.getString("date");
         } catch (JSONException e)
         {
@@ -517,7 +524,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         try
         {
             JSONArray jsonArray = new JSONArray(text);
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            JSONObject jsonObject = jsonArray.getJSONObject(1);
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
@@ -543,7 +550,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         try
         {
             JSONArray jsonArray = new JSONArray(text);
-            JSONObject jsonObject = jsonArray.getJSONObject(1);
+            JSONObject jsonObject = jsonArray.getJSONObject(2);
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
@@ -569,7 +576,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         try
         {
             JSONArray jsonArray = new JSONArray(text);
-            JSONObject jsonObject = jsonArray.getJSONObject(1);
+            JSONObject jsonObject = jsonArray.getJSONObject(3);
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
@@ -595,7 +602,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         try
         {
             JSONArray jsonArray = new JSONArray(text);
-            JSONObject jsonObject = jsonArray.getJSONObject(1);
+            JSONObject jsonObject = jsonArray.getJSONObject(4);
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
@@ -621,7 +628,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         try
         {
             JSONArray jsonArray = new JSONArray(text);
-            JSONObject jsonObject = jsonArray.getJSONObject(1);
+            JSONObject jsonObject = jsonArray.getJSONObject(5);
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
@@ -647,7 +654,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         try
         {
             JSONArray jsonArray = new JSONArray(text);
-            JSONObject jsonObject = jsonArray.getJSONObject(1);
+            JSONObject jsonObject = jsonArray.getJSONObject(6);
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
