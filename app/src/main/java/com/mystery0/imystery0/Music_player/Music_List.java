@@ -3,7 +3,8 @@ package com.mystery0.imystery0.Music_player;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.util.Log;
+
+import com.mystery0.imystery0.Class_class.Music;
 
 import java.util.ArrayList;
 import java.util.List;
