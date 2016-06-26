@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by myste on 2016-6-5-0005.
+ * 加载音乐列表
  */
 public class Music_List
 {

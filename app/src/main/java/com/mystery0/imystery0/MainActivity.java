@@ -42,6 +42,7 @@ import cn.bmob.v3.update.BmobUpdateAgent;
 
 /**
  * Created by myste on 2016-6-2-0002.
+ * 主视图
  */
 public class MainActivity extends Activity implements View.OnClickListener, ILocationCallback, AdapterView.OnItemClickListener
 {

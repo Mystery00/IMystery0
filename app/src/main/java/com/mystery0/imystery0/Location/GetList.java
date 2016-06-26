@@ -9,7 +9,7 @@ import android.util.Log;
 import com.mystery0.imystery0.Class_class.City;
 import com.mystery0.imystery0.Class_class.District;
 import com.mystery0.imystery0.Class_class.Province;
-import com.mystery0.imystery0.SQL.ISQLiteOpenHelper;
+import com.mystery0.imystery0.Location.SQL.ISQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;

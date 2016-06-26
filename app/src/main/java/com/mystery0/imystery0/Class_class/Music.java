@@ -14,7 +14,6 @@ public class Music
     private long size;
     private String url;
     private String album;
-    private int isMusic;
     private boolean isFavorite = false;
 
     public void setId(long id){
@@ -45,18 +44,8 @@ public class Music
 
     public void setUrl(String url){this.url = url;}
 
-    public String getUrl(){return this.url;}
-
     public void setAlbum(String album){this.album = album;}
 
-    public String getAlbum(){return this.album;}
-
     public void setAlbum_id(long album_id){this.album_id = album_id;}
-
-    public long getAlbum_id(){return this.album_id;}
-
-    public void setFavorite(boolean favorite){this.isFavorite =favorite;}
-
-    public boolean getFavorite(){return isFavorite;}
 
 }

@@ -22,18 +22,16 @@ import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by myste on 2016-6-2-0002.
+ * 登录界面
  */
-public class log_in extends Activity
+
+public class log_in extends Activity implements View.OnClickListener
 {
     private boolean isRememberMe=false;
     private EditText user_name;
     private EditText pass_word;
-    private ImageButton login;
     private ImageView RememberMe;
-    private TextView Forgot;
-    private TextView Register;
-    private String username;
-    private String password;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
@@ -42,18 +40,55 @@ public class log_in extends Activity
         setContentView(R.layout.log_in);
 
         initialization();
-        login.setOnClickListener(new View.OnClickListener()
+    }
+
+
+    void initialization()
+    {
+        user_name = (EditText) findViewById(R.id.username);
+        pass_word = (EditText) findViewById(R.id.password);
+        ImageButton login = (ImageButton) findViewById(R.id.Login_button);
+        RememberMe = (ImageView) findViewById(R.id.image_point);
+        TextView forgot = (TextView) findViewById(R.id.forgot);
+        TextView register = (TextView) findViewById(R.id.intent_register);
+        isRemember();
+
+        login.setOnClickListener(this);
+        RememberMe.setOnClickListener(this);
+        register.setOnClickListener(this);
+        forgot.setOnClickListener(this);
+    }
+
+    void isRemember()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("isRememberMe", MODE_PRIVATE);
+        isRememberMe = sharedPreferences.getBoolean("isRemember", false);
+        SharedPreferences preferences = getSharedPreferences("userinfo", MODE_PRIVATE);
+        Log.i("info", isRememberMe + "记住密码");
+        if (isRememberMe)
         {
-            @Override
-            public void onClick(View v)
-            {
+            user_name.setText(preferences.getString("username", ""));
+            pass_word.setText(preferences.getString("password", ""));
+            RememberMe.setImageResource(R.drawable.point_1);
+        } else
+        {
+            RememberMe.setImageResource(R.drawable.point_0);
+        }
+    }
+
+    @Override
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.Login_button:
                 final ProgressDialog progressDialog=new ProgressDialog(log_in.this);
                 progressDialog.setTitle("登录中......");
                 progressDialog.setMessage("Loading...");
                 progressDialog.setCancelable(true);
                 progressDialog.show();
-                username=user_name.getText().toString();
-                password=pass_word.getText().toString();
+                String username = user_name.getText().toString();
+                String password = pass_word.getText().toString();
                 if(isRememberMe)
                 {
                     SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
@@ -83,13 +118,8 @@ public class log_in extends Activity
                         Toast.makeText(log_in.this,"账号或密码错误,请重新登陆!",Toast.LENGTH_SHORT).show();
                     }
                 });
-            }
-        });
-        RememberMe.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
+                break;
+            case R.id.image_point:
                 if(isRememberMe)
                 {
                     SharedPreferences sharedPreferences=getSharedPreferences("isRememberMe",MODE_PRIVATE);
@@ -108,51 +138,13 @@ public class log_in extends Activity
                     editor.apply();
                     RememberMe.setImageResource(R.drawable.point_1);
                 }
-            }
-        });
-        Register.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
+                break;
+            case R.id.intent_register:
                 startActivity(new Intent(log_in.this,Register.class));
-            }
-        });
-        Forgot.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
+                break;
+            case R.id.forgot:
                 Toast.makeText(log_in.this,"此功能正在开发中!",Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    void initialization()
-    {
-        user_name=(EditText)findViewById(R.id.username);
-        pass_word=(EditText)findViewById(R.id.password);
-        login=(ImageButton)findViewById(R.id.Login_button);
-        RememberMe=(ImageView)findViewById(R.id.image_point);
-        Forgot=(TextView)findViewById(R.id.forgot);
-        Register=(TextView)findViewById(R.id.intent_register);
-        isRemember();
-    }
-    void isRemember()
-    {
-        SharedPreferences sharedPreferences=getSharedPreferences("isRememberMe",MODE_PRIVATE);
-        isRememberMe=sharedPreferences.getBoolean("isRemember",false);
-        SharedPreferences preferences=getSharedPreferences("userinfo",MODE_PRIVATE);
-        Log.i("info",isRememberMe+"记住密码");
-        if(isRememberMe)
-        {
-            user_name.setText(preferences.getString("username",""));
-            pass_word.setText(preferences.getString("password",""));
-            RememberMe.setImageResource(R.drawable.point_1);
-        }
-        else
-        {
-            RememberMe.setImageResource(R.drawable.point_0);
+                break;
         }
     }
 }

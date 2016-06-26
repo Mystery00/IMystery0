@@ -12,6 +12,7 @@ import com.mystery0.imystery0.R;
 
 /**
  * Created by myste on 2016-6-2-0002.
+ * 闪屏
  */
 public class Splash extends Activity
 {

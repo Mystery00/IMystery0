@@ -5,9 +5,12 @@ import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.mystery0.imystery0.R;
+
+/**
+ * 推送视图
+ */
 
 public class pushActivity extends AppCompatActivity
 {

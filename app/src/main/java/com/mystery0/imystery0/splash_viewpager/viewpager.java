@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Created by myste on 2016-6-2-0002.
+ * 第一次加载显示
  */
 public class viewpager extends Activity
 {

@@ -17,6 +17,7 @@ import cn.bmob.v3.listener.SaveListener;
 
 /**
  * Created by myste on 2016-6-2-0002.
+ * 注册界面
  */
 public class Register extends Activity
 {

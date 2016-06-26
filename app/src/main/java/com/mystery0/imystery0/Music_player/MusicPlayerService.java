@@ -10,6 +10,7 @@ import java.io.IOException;
 
 /**
  * Created by myste on 2016-6-4-0004.
+ * 音乐播放服务
  */
 public class MusicPlayerService extends Service
 {

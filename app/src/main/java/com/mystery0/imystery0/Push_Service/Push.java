@@ -5,13 +5,13 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import com.mystery0.imystery0.R;
 
 
 /**
  * Created by myste on 2016-6-13-0013.
+ * 推送
  */
 public class Push
 {

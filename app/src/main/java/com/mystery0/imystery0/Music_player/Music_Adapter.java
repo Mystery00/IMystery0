@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by myste on 2016-6-5-0005.
+ * 音乐列表适配器
  */
 class ViewContainer
 {
@@ -29,8 +30,6 @@ public class Music_Adapter extends BaseAdapter
 {
     private Context context;        //上下文对象引用
     private List<Music> Musics;   //存放Mp3Info引用的集合
-    private Music music;        //Mp3Info对象引用
-    private int pos = -1;           //列表位置
     private ViewContainer vc;
 
     public Music_Adapter(Context context,List<Music> musics)
@@ -73,7 +72,7 @@ public class Music_Adapter extends BaseAdapter
         else{
             vc = (ViewContainer)convertView.getTag();
         }
-        music = Musics.get(position);
+        Music music = Musics.get(position);
         vc.music_title.setText(music.getTitle());         //显示标题
         vc.music_artist.setText(music.getArtist());       //显示艺术家
         vc.music_duration.setText(String.valueOf(formatTime(music.getDuration()))); //显示长度

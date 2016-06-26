@@ -3,7 +3,6 @@ package com.mystery0.imystery0.Push_Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,6 +11,7 @@ import cn.bmob.push.PushConstants;
 
 /**
  * Created by myste on 2016-6-13-0013.
+ * 推送接收器
  */
 public class MyPushMessageReceiver extends BroadcastReceiver
 {

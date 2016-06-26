@@ -19,6 +19,7 @@ import java.util.List;
 
 /**
  * Created by myste on 2016-6-4-0004.
+ * 播放器视图
  */
 public class MusicActivity extends Activity implements View.OnClickListener
 {
@@ -30,10 +31,7 @@ public class MusicActivity extends Activity implements View.OnClickListener
     private Intent intent;
     private boolean cc=false;
     private Music_List music_list;
-    private String path;
     private String[] musiclist;
-    private List<Music> Musics;
-    private Music_Adapter mAdapter;
     private int nowPlaying=-1;
 
     @Override
@@ -54,9 +52,9 @@ public class MusicActivity extends Activity implements View.OnClickListener
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(true);
         progressDialog.show();
-        Musics=music_list.getMusic(MusicActivity.this.getContentResolver());
+        List<Music> musics = music_list.getMusic(MusicActivity.this.getContentResolver());
         musiclist=music_list.getmusiclist();
-        mAdapter = new Music_Adapter(MusicActivity.this, Musics);
+        Music_Adapter mAdapter = new Music_Adapter(MusicActivity.this, musics);
         Music_list.setAdapter(mAdapter);
         progressDialog.dismiss();
 
@@ -133,7 +131,7 @@ public class MusicActivity extends Activity implements View.OnClickListener
     {
         if(!cc)
             stopService(intent);
-        path=musiclist[position];
+        String path = musiclist[position];
         MusicPlayerService.Prepare(path);
         startService(intent);
     }

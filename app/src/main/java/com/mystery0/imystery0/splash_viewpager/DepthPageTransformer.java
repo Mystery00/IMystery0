@@ -3,6 +3,10 @@ package com.mystery0.imystery0.splash_viewpager;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+/**
+ * viewpager切换动画
+ */
+
 public class DepthPageTransformer implements ViewPager.PageTransformer {
     private static final float MIN_SCALE = 0.75f;
 
