@@ -25,6 +25,10 @@
             android:name="BMOB_CHANNEL"
             android:value="iMystery0"/>
 
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="03699e6ff602df69caf7cb34e70dfcd9"/>
+
         <activity
             android:name=".log_in_java.log_in"
             android:launchMode="singleTask"
@@ -81,6 +85,9 @@
                 <action android:name="cn.bmob.push.lib.service.PushService"/>
             </intent-filter>
         </service>
+        <service android:name="com.amap.api.location.APSService">
+        </service>
+
 
         <receiver android:name="cn.bmob.push.PushReceiver">
             <intent-filter>

@@ -95,6 +95,7 @@ public class log_in extends Activity
                     SharedPreferences sharedPreferences=getSharedPreferences("isRememberMe",MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putBoolean("isRemember",false);
+                    isRememberMe = true;
                     editor.apply();
                     RememberMe.setImageResource(R.drawable.point_0);
                 }
@@ -103,6 +104,7 @@ public class log_in extends Activity
                     SharedPreferences sharedPreferences=getSharedPreferences("isRememberMe",MODE_PRIVATE);
                     SharedPreferences.Editor editor=sharedPreferences.edit();
                     editor.putBoolean("isRemember",true);
+                    isRememberMe = false;
                     editor.apply();
                     RememberMe.setImageResource(R.drawable.point_1);
                 }
