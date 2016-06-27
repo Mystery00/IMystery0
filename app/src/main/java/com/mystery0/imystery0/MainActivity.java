@@ -12,9 +12,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mystery0.imystery0.Chat_Online.chat_Activity;
 import com.mystery0.imystery0.Feed_back.Feedback_main;
 import com.mystery0.imystery0.Location.ILocationCallback;
 import com.mystery0.imystery0.Location.List.Province_list;
@@ -47,7 +49,6 @@ import cn.bmob.v3.update.BmobUpdateAgent;
 public class MainActivity extends Activity implements View.OnClickListener, ILocationCallback, AdapterView.OnItemClickListener
 {
     private ListView listView;
-    String[] text={"音乐播放器","意见反馈"};
     private String District;
     private LocationHelper location;
     private FindCode findCode;
@@ -313,7 +314,9 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         code_5.setImageResource(Get.get(getTemp.getCode_5()));
         code_6.setImageResource(Get.get(getTemp.getCode_6()));
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_expandable_list_item_1, text);
+        final SimpleAdapter adapter = new SimpleAdapter(
+                this, AdapterToList.getlist(), R.layout.menu_item, new String[]{"pic", "text"}, new int[]{R.id.menu_image, R.id.menu_text}
+        );
         listView.setAdapter(adapter);
 
         /**
@@ -375,6 +378,9 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 startActivity(new Intent(MainActivity.this, MusicActivity.class));
                 break;
             case 2:
+                startActivity(new Intent(MainActivity.this, chat_Activity.class));
+                break;
+            case 3:
                 startActivity(new Intent(MainActivity.this, Feedback_main.class));
                 break;
         }
