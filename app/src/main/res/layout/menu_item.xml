@@ -16,7 +16,7 @@
         android:layout_margin="10dp"
         android:layout_toRightOf="@+id/menu_image"
         android:layout_toEndOf="@id/menu_image"
-        android:textSize="30sp"
-        android:gravity="left|center_vertical"
+        android:textSize="20sp"
+        android:gravity="start|center_vertical"
         android:id="@+id/menu_text"/>
 </RelativeLayout>

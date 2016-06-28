@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:background="@drawable/bubble_received"
         android:id="@+id/left_layout"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:layout_height="wrap_content">
 
         <TextView
@@ -18,13 +18,13 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
-            android:id="@+id/text_received"/>
+            android:id="@+id/text_left"/>
     </LinearLayout>
 
     <LinearLayout
         android:background="@drawable/bubble_send"
         android:id="@+id/right_layout"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
-            android:id="@+id/text_send"
+            android:id="@+id/text_right"
             android:layout_gravity="center"/>
     </LinearLayout>
 </LinearLayout>

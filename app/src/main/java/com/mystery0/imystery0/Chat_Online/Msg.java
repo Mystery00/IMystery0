@@ -3,6 +3,7 @@ package com.mystery0.imystery0.Chat_Online;
 
 /**
  * Created by myste on 2016-6-26-0026.
+ * Msg类
  */
 public class Msg
 {
