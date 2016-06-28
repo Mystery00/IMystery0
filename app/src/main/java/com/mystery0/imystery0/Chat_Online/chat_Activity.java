@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class chat_Activity extends Activity implements View.OnClickListener
 {
     private ListView listView;
@@ -32,6 +33,7 @@ public class chat_Activity extends Activity implements View.OnClickListener
     private List<Msg> msgList = new ArrayList<>();
     public static final int RECEIVED = 0;
     public static final int SEND = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,6 +78,7 @@ public class chat_Activity extends Activity implements View.OnClickListener
                 case RECEIVED:
                     Msg msg1 = new Msg((String) message.obj, Msg.RECEIVED);
                     msgList.add(msg1);
+                    Log.i("info", "接收信息:" + message.obj);
                     msgAdapter.notifyDataSetChanged();
                     listView.setSelection(msgList.size());
                     break;
@@ -99,9 +102,11 @@ public class chat_Activity extends Activity implements View.OnClickListener
             {
                 HttpURLConnection connection = null;
                 String text = null;
+                String c = Change.convertStringToUTF8(content);
+                Log.i("info", c);
                 try
                 {
-                    URL url = new URL("http://www.tuling123.com/openapi/api?key=a1d749c50677714e45b6b5a0f33c04e6&info=" + content);
+                    URL url = new URL("http://www.tuling123.com/openapi/api?key=a1d749c50677714e45b6b5a0f33c04e6&info=" + c);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(8000);
