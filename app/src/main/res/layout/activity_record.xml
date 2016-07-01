@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mystery0.imystery0.HistoryRecord.RecordActivity">
+
+    <ImageButton
+        android:layout_width="60dp"
+        android:layout_margin="5dp"
+        android:contentDescription="@string/app_name"
+        android:background="@drawable/back_button"
+        android:id="@+id/back_record"
+        android:layout_height="60dp"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/listRecord"
+        android:layout_height="match_parent">
+    </ListView>
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.mystery0.imystery0.Chat_Online;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -9,7 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.mystery0.imystery0.HistoryRecord.RecordActivity;
+import com.mystery0.imystery0.HistoryRecord.RecordSQLiteOpenHelper;
 import com.mystery0.imystery0.R;
 
 import org.json.JSONException;
@@ -30,6 +34,8 @@ public class chat_Activity extends Activity implements View.OnClickListener
     private EditText text;
     private ImageButton sendButton;
     private MsgAdapter msgAdapter;
+    private TextView history;
+    private ImageButton back;
     private List<Msg> msgList = new ArrayList<>();
     public static final int RECEIVED = 0;
     public static final int SEND = 1;
@@ -43,6 +49,8 @@ public class chat_Activity extends Activity implements View.OnClickListener
         initialization();
 
         sendButton.setOnClickListener(this);
+        history.setOnClickListener(this);
+        back.setOnClickListener(this);
     }
 
     private void initialization()
@@ -50,6 +58,8 @@ public class chat_Activity extends Activity implements View.OnClickListener
         listView = (ListView) findViewById(R.id.listView);
         text = (EditText) findViewById(R.id.chat_text);
         sendButton = (ImageButton) findViewById(R.id.send);
+        history = (TextView) findViewById(R.id.history);
+        back = (ImageButton) findViewById(R.id.back);
         msgAdapter = new MsgAdapter(chat_Activity.this, R.layout.msg_item, msgList);
         listView.setAdapter(msgAdapter);
     }
@@ -57,14 +67,25 @@ public class chat_Activity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        String content = text.getText().toString();
-        if (!content.equals(""))
+        switch (v.getId())
         {
-            Message message = new Message();
-            message.what = SEND;
-            message.obj = content;
-            handler.sendMessage(message);
-            GetMessage(content);
+            case R.id.send:
+                String content = text.getText().toString();
+                if (!content.equals(""))
+                {
+                    Message message = new Message();
+                    message.what = SEND;
+                    message.obj = content;
+                    handler.sendMessage(message);
+                    GetMessage(content);
+                }
+                break;
+            case R.id.back:
+                finish();
+                break;
+            case R.id.history:
+                startActivity(new Intent(chat_Activity.this, RecordActivity.class));
+                break;
         }
     }
 
@@ -81,6 +102,8 @@ public class chat_Activity extends Activity implements View.OnClickListener
                     Log.i("info", "接收信息:" + message.obj);
                     msgAdapter.notifyDataSetChanged();
                     listView.setSelection(msgList.size());
+                    RecordSQLiteOpenHelper recordSQLiteOpenHelper1 = new RecordSQLiteOpenHelper(chat_Activity.this, "history_list.db");
+                    recordSQLiteOpenHelper1.putValue(msg1);
                     break;
                 case SEND:
                     Msg msg2 = new Msg((String) message.obj, Msg.SEND);
@@ -88,6 +111,8 @@ public class chat_Activity extends Activity implements View.OnClickListener
                     msgAdapter.notifyDataSetChanged();
                     listView.setSelection(msgList.size());
                     text.setText("");
+                    RecordSQLiteOpenHelper recordSQLiteOpenHelper2 = new RecordSQLiteOpenHelper(chat_Activity.this, "history_list.db");
+                    recordSQLiteOpenHelper2.putValue(msg2);
                     break;
             }
         }

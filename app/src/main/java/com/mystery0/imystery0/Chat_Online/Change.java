@@ -2,6 +2,7 @@ package com.mystery0.imystery0.Chat_Online;
 
 /**
  * Created by myste on 2016-6-28-0028.
+ * 汉字编码转换
  */
 public class Change
 {

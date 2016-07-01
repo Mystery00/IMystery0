@@ -113,6 +113,8 @@
         </activity>
         <activity android:name=".Chat_Online.chat_Activity">
         </activity>
+        <activity android:name=".HistoryRecord.RecordActivity">
+        </activity>
     </application>
 
 </manifest>

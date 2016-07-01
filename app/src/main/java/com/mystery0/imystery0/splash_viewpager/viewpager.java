@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +46,6 @@ public class viewpager extends Activity
         LayoutInflater inflater= LayoutInflater.from(this);//获取页面
         viewList = new ArrayList<View>();
 
-        Log.i("info","viewpager启动!!!");
 
         viewList.add(inflater.inflate(R.layout.viewpager_1,null));
         viewList.add(inflater.inflate(R.layout.viewpager_2,null));

@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * Created by myste on 2016-6-26-0026.
+ * 菜单列表
  */
 public class AdapterToList
 {
