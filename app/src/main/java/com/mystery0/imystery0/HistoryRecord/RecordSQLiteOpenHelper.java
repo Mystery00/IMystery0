@@ -32,10 +32,4 @@ public class RecordSQLiteOpenHelper extends SQLiteOpenHelper
     {
 
     }
-
-    public void putValue(Msg msg)//插入值
-    {
-        db.execSQL(
-                "INSERT INTO history_list(content,type,date) VALUES (" + msg.getContent() + "," + msg.getType() + ");");
-    }
 }

@@ -9,8 +9,8 @@ android {
         applicationId "com.mystery0.imystery0"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 29
-        versionName "2.2.0"
+        versionCode 30
+        versionName "2.2.1"
     }
     buildTypes {
         release {

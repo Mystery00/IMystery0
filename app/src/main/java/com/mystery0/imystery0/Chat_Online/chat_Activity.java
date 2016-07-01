@@ -1,7 +1,9 @@
 package com.mystery0.imystery0.Chat_Online;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -94,6 +96,8 @@ public class chat_Activity extends Activity implements View.OnClickListener
         @Override
         public void handleMessage(Message message)
         {
+            RecordSQLiteOpenHelper recordSQLiteOpenHelper = new RecordSQLiteOpenHelper(chat_Activity.this, "history_list.db");
+            SQLiteDatabase db = recordSQLiteOpenHelper.getWritableDatabase();
             switch (message.what)
             {
                 case RECEIVED:
@@ -102,8 +106,11 @@ public class chat_Activity extends Activity implements View.OnClickListener
                     Log.i("info", "接收信息:" + message.obj);
                     msgAdapter.notifyDataSetChanged();
                     listView.setSelection(msgList.size());
-                    RecordSQLiteOpenHelper recordSQLiteOpenHelper1 = new RecordSQLiteOpenHelper(chat_Activity.this, "history_list.db");
-                    recordSQLiteOpenHelper1.putValue(msg1);
+                    ContentValues values1 = new ContentValues();
+                    values1.put("content", msg1.getContent());
+                    values1.put("type", msg1.getType());
+                    db.insert("history_list", null, values1);
+                    db.close();
                     break;
                 case SEND:
                     Msg msg2 = new Msg((String) message.obj, Msg.SEND);
@@ -111,8 +118,11 @@ public class chat_Activity extends Activity implements View.OnClickListener
                     msgAdapter.notifyDataSetChanged();
                     listView.setSelection(msgList.size());
                     text.setText("");
-                    RecordSQLiteOpenHelper recordSQLiteOpenHelper2 = new RecordSQLiteOpenHelper(chat_Activity.this, "history_list.db");
-                    recordSQLiteOpenHelper2.putValue(msg2);
+                    ContentValues values2 = new ContentValues();
+                    values2.put("content", msg2.getContent());
+                    values2.put("type", msg2.getType());
+                    db.insert("history_list", null, values2);
+                    db.close();
                     break;
             }
         }
