@@ -12,7 +12,7 @@ import com.mystery0.imystery0.R;
  * 推送视图
  */
 
-public class pushActivity extends AppCompatActivity
+public class Push_Activity extends AppCompatActivity
 {
 
     @Override

@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.splash_viewpager;
+package com.mystery0.imystery0.Splash_Viewpager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.mystery0.imystery0.log_in_java.log_in;
+import com.mystery0.imystery0.Login_Register.Log_in;
 import com.mystery0.imystery0.R;
 
 /**
@@ -41,11 +41,11 @@ public class Splash extends Activity
                     SharedPreferences.Editor editor=preferences.edit();
                     editor.putBoolean("isFirstIn",false);//设置isFirstIn为false
                     editor.apply();
-                    startActivity(new Intent(Splash.this,viewpager.class));
+                    startActivity(new Intent(Splash.this, Viewpager.class));
                     finish();//销毁Activity
                     break;
                 case GO_HOME:
-                    startActivity(new Intent(Splash.this,log_in.class));
+                    startActivity(new Intent(Splash.this, Log_in.class));
                     finish();
                     break;
             }

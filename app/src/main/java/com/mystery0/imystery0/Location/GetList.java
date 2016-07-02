@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * Created by myste on 2016-6-25-0025.
+ * 获取列表
  */
 public class GetList
 {
@@ -60,9 +61,9 @@ public class GetList
             while (cursor.moveToNext())
             {
                 City city = new City();
-                city.setcity_name(cursor.getString(cursor.getColumnIndex("City")));
+                city.setCity_name(cursor.getString(cursor.getColumnIndex("City")));
                 cities.add(city);
-                citylist[i] = city.getcity_name();
+                citylist[i] = city.getCity_name();
                 i++;
             }
             Log.i("info", "市数量:" + i);
@@ -85,9 +86,9 @@ public class GetList
             while (cursor.moveToNext())
             {
                 District district = new District();
-                district.setdistrict_name(cursor.getString(cursor.getColumnIndex("District")));
+                district.setDistrict_name(cursor.getString(cursor.getColumnIndex("District")));
                 districts.add(district);
-                districtlist[i] = district.getdistrict_name();
+                districtlist[i] = district.getDistrict_name();
                 i++;
             }
             Log.i("info", "县数量:" + i);

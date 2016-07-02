@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mystery0.imystery0.HistoryRecord.RecordActivity;
+import com.mystery0.imystery0.HistoryRecord.HistoryRecord_Activity;
 import com.mystery0.imystery0.HistoryRecord.RecordSQLiteOpenHelper;
 import com.mystery0.imystery0.R;
 
@@ -41,6 +41,7 @@ public class chat_Activity extends Activity implements View.OnClickListener
     private List<Msg> msgList = new ArrayList<>();
     public static final int RECEIVED = 0;
     public static final int SEND = 1;
+    public static final int CODE = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -86,9 +87,17 @@ public class chat_Activity extends Activity implements View.OnClickListener
                 finish();
                 break;
             case R.id.history:
-                startActivity(new Intent(chat_Activity.this, RecordActivity.class));
+                startActivityForResult(new Intent(chat_Activity.this, HistoryRecord_Activity.class), CODE);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        if (requestCode == CODE)
+            if (resultCode == RESULT_OK)
+                msgAdapter.notifyDataSetChanged();
     }
 
     private Handler handler = new Handler()
@@ -103,7 +112,6 @@ public class chat_Activity extends Activity implements View.OnClickListener
                 case RECEIVED:
                     Msg msg1 = new Msg((String) message.obj, Msg.RECEIVED);
                     msgList.add(msg1);
-                    Log.i("info", "接收信息:" + message.obj);
                     msgAdapter.notifyDataSetChanged();
                     listView.setSelection(msgList.size());
                     ContentValues values1 = new ContentValues();

@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.splash_viewpager;
+package com.mystery0.imystery0.Splash_Viewpager;
 
 import android.support.v4.view.ViewPager;
 import android.view.View;

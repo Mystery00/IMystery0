@@ -1,6 +1,8 @@
 package com.mystery0.imystery0.HistoryRecord;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -16,10 +18,11 @@ import com.mystery0.imystery0.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordActivity extends Activity implements View.OnClickListener
+public class HistoryRecord_Activity extends Activity implements View.OnClickListener
 {
     private ImageButton back;
     private TextView textDelete;
+    private HistoryAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,21 +42,41 @@ public class RecordActivity extends Activity implements View.OnClickListener
         back = (ImageButton) findViewById(R.id.back_record);
         textDelete = (TextView) findViewById(R.id.text_delete);
         List<Msg> msgList = getMsgList();
-        HistoryAdapter adapter = new HistoryAdapter(msgList, this.getApplicationContext());
+        adapter = new HistoryAdapter(msgList, this.getApplicationContext());
         listView.setAdapter(adapter);
     }
 
     @Override
     public void onClick(View v)
     {
+        Intent intent = new Intent();
         switch (v.getId())
         {
             case R.id.back_record:
+                setResult(RESULT_CANCELED, intent);
                 finish();
                 break;
             case R.id.text_delete:
+                ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle("正在删除......");
+                progressDialog.setMessage("Loading...");
+                progressDialog.setCancelable(false);
+                progressDialog.show();
+                DeleteHistory();
+                setResult(RESULT_OK, intent);
+                progressDialog.dismiss();
+                finish();
                 break;
         }
+    }
+
+    private void DeleteHistory()
+    {
+        RecordSQLiteOpenHelper recordSQLiteOpenHelper = new RecordSQLiteOpenHelper(HistoryRecord_Activity.this, "history_list.db");
+        SQLiteDatabase db = recordSQLiteOpenHelper.getWritableDatabase();
+        db.delete("history_list", null, null);
+        db.close();
+        adapter.notifyDataSetChanged();
     }
 
     private List<Msg> getMsgList()

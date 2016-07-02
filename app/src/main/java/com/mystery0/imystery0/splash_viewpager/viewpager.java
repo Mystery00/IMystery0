@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.splash_viewpager;
+package com.mystery0.imystery0.Splash_Viewpager;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.mystery0.imystery0.log_in_java.log_in;
+import com.mystery0.imystery0.Login_Register.Log_in;
 import com.mystery0.imystery0.R;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ import java.util.List;
  * Created by myste on 2016-6-2-0002.
  * 第一次加载显示
  */
-public class viewpager extends Activity
+public class Viewpager extends Activity
 {
     private ImageButton intent;
     private ViewPager viewPager;
@@ -60,7 +60,7 @@ public class viewpager extends Activity
             @Override
             public void onClick(View v)
             {
-                startActivity(new Intent(viewpager.this, log_in.class));
+                startActivity(new Intent(Viewpager.this, Log_in.class));
                 finish();
             }
         });

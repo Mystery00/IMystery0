@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.Music_player;
+package com.mystery0.imystery0.Music_Player;
 
 
 import android.content.Context;
@@ -26,16 +26,16 @@ class ViewContainer
     public ImageButton list_down_button;
 }
 
-public class Music_Adapter extends BaseAdapter
+public class MusicAdapter extends BaseAdapter
 {
     private Context context;        //上下文对象引用
     private List<Music> Musics;   //存放Mp3Info引用的集合
     private ViewContainer vc;
 
-    public Music_Adapter(Context context,List<Music> musics)
+    public MusicAdapter(Context context, List<Music> musics)
     {
-        this.context=context;
-        this.Musics=musics;
+        this.context = context;
+        this.Musics = musics;
     }
 
     @Override
@@ -59,18 +59,19 @@ public class Music_Adapter extends BaseAdapter
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        if(convertView == null){
+        if (convertView == null)
+        {
             vc = new ViewContainer();
             convertView = LayoutInflater.from(context).
                     inflate(R.layout.music_item, null);
-            vc.music_title = (TextView)convertView.findViewById(R.id.music_title);
-            vc.music_artist = (TextView)convertView.findViewById(R.id.music_Artist);
-            vc.music_duration = (TextView)convertView.findViewById(R.id.music_duration);
-            vc.list_down_button = (ImageButton)convertView.findViewById(R.id.list_down_button);
+            vc.music_title = (TextView) convertView.findViewById(R.id.music_title);
+            vc.music_artist = (TextView) convertView.findViewById(R.id.music_Artist);
+            vc.music_duration = (TextView) convertView.findViewById(R.id.music_duration);
+            vc.list_down_button = (ImageButton) convertView.findViewById(R.id.list_down_button);
             convertView.setTag(vc);
-        }
-        else{
-            vc = (ViewContainer)convertView.getTag();
+        } else
+        {
+            vc = (ViewContainer) convertView.getTag();
         }
         Music music = Musics.get(position);
         vc.music_title.setText(music.getTitle());         //显示标题
@@ -78,12 +79,13 @@ public class Music_Adapter extends BaseAdapter
         vc.music_duration.setText(String.valueOf(formatTime(music.getDuration()))); //显示长度
         return convertView;
     }
+
     public static String formatTime(Long time)
     {                     //将歌曲的时间转换为分秒的制度
         String min = time / (1000 * 60) + "";
         String sec = time % (1000 * 60) + "";
 
-        if(min.length() < 2)
+        if (min.length() < 2)
             min = "0" + min;
         switch (sec.length())
         {
@@ -100,6 +102,6 @@ public class Music_Adapter extends BaseAdapter
                 sec = "0000" + sec;
                 break;
         }
-        return min + ":" + sec.trim().substring(0,2);
+        return min + ":" + sec.trim().substring(0, 2);
     }
 }

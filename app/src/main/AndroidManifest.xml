@@ -29,12 +29,12 @@
             android:value="03699e6ff602df69caf7cb34e70dfcd9"/>
 
         <activity
-            android:name=".log_in_java.log_in"
+            android:name=".Login_Register.Log_in"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".log_in_java.Register"
+            android:name=".Login_Register.Register"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
         </activity>
@@ -44,7 +44,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".splash_viewpager.Splash"
+            android:name=".Splash_Viewpager.Splash"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -54,26 +54,26 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".splash_viewpager.viewpager"
+            android:name=".Splash_Viewpager.Viewpager"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Music_player.MusicActivity">
+        <activity android:name=".Music_Player.Music_Activity">
         </activity>
-        <activity android:name=".Feed_back.Feedback_main">
+        <activity android:name=".Feed_back.Feedback_Activity">
         </activity>
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
-        <activity android:name=".Location.List.City_list">
+        <activity android:name=".Location.List.City_List">
         </activity>
-        <activity android:name=".Location.List.District_list">
+        <activity android:name=".Location.List.District_List">
         </activity>
-        <activity android:name=".Location.List.Province_list">
+        <activity android:name=".Location.List.Province_List">
         </activity>
 
-        <service android:name=".Music_player.MusicPlayerService">
+        <service android:name=".Music_Player.Music_Service">
         </service>
         <service
             android:name="cn.bmob.push.lib.service.PushService"
@@ -102,18 +102,18 @@
 
         <!-- 第四部中创建的消息接收器，在这里进行注册 -->
         <receiver
-            android:name=".Push_Service.MyPushMessageReceiver"
+            android:name=".Push_Service.PushMessageReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE"/>
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Push_Service.pushActivity">
+        <activity android:name=".Push_Service.Push_Activity">
         </activity>
         <activity android:name=".Chat_Online.chat_Activity">
         </activity>
-        <activity android:name=".HistoryRecord.RecordActivity">
+        <activity android:name=".HistoryRecord.HistoryRecord_Activity">
         </activity>
     </application>
 

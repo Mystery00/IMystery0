@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.Music_player;
+package com.mystery0.imystery0.Music_Player;
 
 
 import android.app.Activity;
@@ -21,7 +21,7 @@ import java.util.List;
  * Created by myste on 2016-6-4-0004.
  * 播放器视图
  */
-public class MusicActivity extends Activity implements View.OnClickListener
+public class Music_Activity extends Activity implements View.OnClickListener
 {
     private ImageButton back_button;
     private ListView Music_list;
@@ -29,10 +29,10 @@ public class MusicActivity extends Activity implements View.OnClickListener
     private ImageButton play_button;
     private ImageButton next_button;
     private Intent intent;
-    private boolean cc=false;
+    private boolean cc = false;
     private Music_List music_list;
     private String[] musiclist;
-    private int nowPlaying=-1;
+    private int nowPlaying = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -47,14 +47,14 @@ public class MusicActivity extends Activity implements View.OnClickListener
     protected void onResume()
     {
         super.onResume();
-        ProgressDialog progressDialog=new ProgressDialog(MusicActivity.this);
+        ProgressDialog progressDialog = new ProgressDialog(Music_Activity.this);
         progressDialog.setTitle("正在查找本地音乐...");
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(true);
         progressDialog.show();
-        List<Music> musics = music_list.getMusic(MusicActivity.this.getContentResolver());
-        musiclist=music_list.getmusiclist();
-        Music_Adapter mAdapter = new Music_Adapter(MusicActivity.this, musics);
+        List<Music> musics = music_list.getMusic(Music_Activity.this.getContentResolver());
+        musiclist = music_list.getmusiclist();
+        MusicAdapter mAdapter = new MusicAdapter(Music_Activity.this, musics);
         Music_list.setAdapter(mAdapter);
         progressDialog.dismiss();
 
@@ -68,14 +68,13 @@ public class MusicActivity extends Activity implements View.OnClickListener
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                nowPlaying=position;
+                nowPlaying = position;
                 prepare_music(nowPlaying);
                 play_button.setBackgroundResource(R.drawable.pause_button);
-                cc=false;
+                cc = false;
             }
         });
     }
-
 
 
     @Override
@@ -84,55 +83,54 @@ public class MusicActivity extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.play_button:
-                if(cc)
+                if (cc)
                 {
                     play_button.setBackgroundResource(R.drawable.pause_button);
                     cc = false;
-                    MusicPlayerService.Play();
-                }
-                else
+                    Music_Service.Play();
+                } else
                 {
                     play_button.setBackgroundResource(R.drawable.play_button);
                     cc = true;
-                    MusicPlayerService.Pause();
+                    Music_Service.Pause();
                 }
                 break;
             case R.id.back_Button:
-                startActivity(new Intent(MusicActivity.this,MainActivity.class));
+                startActivity(new Intent(Music_Activity.this, MainActivity.class));
                 finish();
                 break;
             case R.id.last_button:
                 nowPlaying--;
                 prepare_music(nowPlaying);
                 play_button.setBackgroundResource(R.drawable.pause_button);
-                cc=false;
+                cc = false;
                 break;
             case R.id.next_button:
                 nowPlaying++;
                 prepare_music(nowPlaying);
                 play_button.setBackgroundResource(R.drawable.pause_button);
-                cc=false;
+                cc = false;
                 break;
         }
     }
 
     void initialization()
     {
-        back_button=(ImageButton)findViewById(R.id.back_Button);
-        Music_list=(ListView)findViewById(R.id.music_list);
-        last_button=(ImageButton)findViewById(R.id.last_button);
-        play_button=(ImageButton)findViewById(R.id.play_button);
-        next_button=(ImageButton)findViewById(R.id.next_button);
-        music_list=new Music_List();
-        intent=new Intent(MusicActivity.this,MusicPlayerService.class);
+        back_button = (ImageButton) findViewById(R.id.back_Button);
+        Music_list = (ListView) findViewById(R.id.music_list);
+        last_button = (ImageButton) findViewById(R.id.last_button);
+        play_button = (ImageButton) findViewById(R.id.play_button);
+        next_button = (ImageButton) findViewById(R.id.next_button);
+        music_list = new Music_List();
+        intent = new Intent(Music_Activity.this, Music_Service.class);
     }
 
     void prepare_music(int position)
     {
-        if(!cc)
+        if (!cc)
             stopService(intent);
         String path = musiclist[position];
-        MusicPlayerService.Prepare(path);
+        Music_Service.Prepare(path);
         startService(intent);
     }
 }

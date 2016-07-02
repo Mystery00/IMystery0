@@ -29,7 +29,7 @@ public class Push
         builder.setContentTitle("来自开发者的信息");//设置标题
         builder.setContentText(text);//设置通知内容
 
-        Intent intent = new Intent(context,pushActivity.class);//设疑点击意图
+        Intent intent = new Intent(context, Push_Activity.class);//设疑点击意图
         PendingIntent pintent = PendingIntent.getActivity(context,0, intent,0 );
         builder.setContentIntent(pintent);//点击后的意图
         Notification notification= builder.build();//加载布局
