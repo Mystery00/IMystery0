@@ -1,6 +1,5 @@
 package com.mystery0.imystery0.HistoryRecord;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import java.util.List;
 
 /**
  * Created by myste on 2016-7-1-0001.
- * 历史记录适配器
  */
 public class HistoryAdapter extends BaseAdapter
 {
@@ -46,7 +44,6 @@ public class HistoryAdapter extends BaseAdapter
         return position;
     }
 
-    @SuppressLint({"ViewHolder", "InflateParams"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
