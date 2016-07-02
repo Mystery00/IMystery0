@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#99232323" >
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#99232323">
 
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/bmob_update_dialog_bg"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <!-- Title -->
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="40dp" >
+            android:layout_height="40dp">
 
             <ImageView
                 android:id="@+id/bmob_update_wifi_indicator"
@@ -23,8 +24,9 @@
                 android:layout_height="30dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:contentDescription="@string/BMGprsCondition"
-                android:src="@drawable/bmob_update_wifi_disable" />
+                android:src="@drawable/bmob_update_wifi_disable"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,19 +34,21 @@
                 android:layout_centerInParent="true"
                 android:text="@string/BMUpdateTitle"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#63C2FF" />
-            
+                android:textColor="#63C2FF"/>
+
             <Button
                 android:id="@+id/bmob_update_id_close"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentRight="true"
-				android:layout_centerVertical="true"
-				android:layout_marginRight="10dp"
-				android:focusable="true"
-				android:visibility="gone"
-				android:background="@drawable/bmob_update_button_close_bg_selector"/>
-            
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/bmob_update_button_close_bg_selector"
+                android:focusable="true"
+                android:visibility="gone"/>
+
         </RelativeLayout>
 
         <!-- split -->
@@ -54,19 +58,19 @@
             android:layout_height="2dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="#2AACFF" />
+            android:background="#2AACFF"/>
         <!-- Content -->
 
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="10dp" >
+            android:padding="10dp">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/bmob_update_content"
@@ -76,26 +80,26 @@
                     android:layout_marginRight="5dp"
                     android:layout_marginTop="10dp"
                     android:focusable="true"
-                    android:textColor="#AAABAF" />
+                    android:textColor="#AAABAF"/>
             </LinearLayout>
         </ScrollView>
-        
+
         <!-- Ignore CheckBox -->
 
-		<CheckBox
-		    android:id="@+id/bmob_update_id_check"
-	        android:layout_width="fill_parent"
-	        android:layout_height="32dp"
-	        android:visibility="gone"
-	        android:text="@string/BMIgnore"
-	        android:button="@drawable/bmob_update_button_check_selector"
-	        android:textColor="#AAABAF" />
+        <CheckBox
+            android:id="@+id/bmob_update_id_check"
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:button="@drawable/bmob_update_button_check_selector"
+            android:text="@string/BMIgnore"
+            android:textColor="#AAABAF"
+            android:visibility="gone"/>
 
         <!-- OK&Cancel Button -->
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/bmob_update_id_ok"
@@ -104,11 +108,12 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bmob_update_button_ok_bg_selector"
+                android:focusable="true"
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="@string/BMUpdateNow"
-				android:focusable="true"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                tools:ignore="ButtonStyle"/>
 
             <Button
                 android:id="@+id/bmob_update_id_cancel"
@@ -117,25 +122,27 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bmob_update_button_cancel_bg_selector"
+                android:focusable="true"
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="@string/BMNotNow"
-				android:focusable="true"
-                android:textColor="#AAABAF" />
+                android:textColor="#AAABAF"
+                tools:ignore="ButtonStyle"/>
 
             <Button
                 android:id="@+id/bmob_update_id_ignore"
-				android:visibility="gone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/bmob_update_button_cancel_bg_selector"
+                android:focusable="true"
                 android:gravity="center"
                 android:padding="12dp"
                 android:text="@string/BMIgnore"
-				android:focusable="true"
-                android:textColor="#AAABAF" />
+                android:textColor="#AAABAF"
+                android:visibility="gone"
+                tools:ignore="ButtonStyle"/>
         </LinearLayout>
     </LinearLayout>
 

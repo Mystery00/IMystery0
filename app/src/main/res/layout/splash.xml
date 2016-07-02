@@ -7,6 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/splash"
+        android:contentDescription="@string/des_splash_img"
         android:src="@drawable/logo"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>

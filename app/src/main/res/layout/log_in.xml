@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -14,6 +15,7 @@
         android:src="@drawable/logo"
         android:layout_marginRight="40dp"
         android:layout_marginEnd="40dp"
+        android:contentDescription="@string/des_logo_img"
         android:id="@+id/imageView"/>
 
     <RelativeLayout
@@ -47,6 +49,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"
             android:src="@drawable/username"
+            android:contentDescription="@string/des_username_img"
             android:layout_toLeftOf="@id/username"
             android:layout_toStartOf="@id/username"/>
     </RelativeLayout>
@@ -80,6 +83,7 @@
             android:src="@drawable/password"
             android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"
+            android:contentDescription="@string/des_password_img"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/password"
             android:layout_toStartOf="@id/password"/>
@@ -99,6 +103,7 @@
         <ImageButton
             android:layout_width="match_parent"
             android:id="@+id/Login_button"
+            android:contentDescription="@string/des_login_img"
             android:background="@drawable/login_button_background"
             android:layout_height="match_parent"/>
 
@@ -125,11 +130,12 @@
             android:layout_alignParentStart="true"
             android:layout_marginLeft="20dp"
             android:layout_marginStart="20dp"
+            android:contentDescription="@string/des_remember_img"
             android:id="@+id/image_point"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:textSize="20sp"
             android:textColor="@color/editText"
             android:layout_toRightOf="@+id/image_point"
@@ -138,16 +144,16 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:id="@+id/forgot"
-            android:onClick="forgot"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
+            android:gravity="center_vertical"
             android:layout_marginRight="20dp"
             android:textColor="@color/editText"
             android:layout_marginEnd="20dp"
             android:text="@string/text2"
-            />
+            tools:ignore="RelativeOverlap"/>
     </RelativeLayout>
 
     <TextView

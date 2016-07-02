@@ -6,4 +6,5 @@
     <color name="editText">#FFFFFF</color>
     <color name="viewPager">#E1F8FE</color>
     <color name="chat_hint">#9c9c9c</color>
+    <color name="history_head">#009688</color>
 </resources>

@@ -12,9 +12,11 @@
         android:layout_height="match_parent">
 
         <ImageButton
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_margin="5dp"
-            android:layout_height="60dp"
+            android:contentDescription="@string/des_back_img"
+            android:layout_centerVertical="true"
+            android:layout_height="40dp"
             android:background="@drawable/back_button"
             android:id="@+id/back_Button"/>
 
@@ -57,6 +59,7 @@
         <ImageButton
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:contentDescription="@string/des_play_img"
             android:background="@drawable/play_button"
             android:layout_centerInParent="true"
             android:id="@+id/play_button"/>
@@ -66,6 +69,7 @@
             android:layout_height="60dp"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
+            android:contentDescription="@string/des_last_img"
             android:layout_centerVertical="true"
             android:background="@drawable/last_button"
             android:layout_toLeftOf="@id/play_button"
@@ -75,6 +79,7 @@
         <ImageButton
             android:layout_width="60dp"
             android:layout_marginLeft="10dp"
+            android:contentDescription="@string/des_next_img"
             android:layout_marginStart="10dp"
             android:background="@drawable/next_button"
             android:layout_centerVertical="true"

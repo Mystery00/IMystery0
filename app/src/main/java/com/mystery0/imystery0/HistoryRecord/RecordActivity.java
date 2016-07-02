@@ -1,7 +1,6 @@
 package com.mystery0.imystery0.HistoryRecord;
 
 import android.app.Activity;
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mystery0.imystery0.Chat_Online.Msg;
 import com.mystery0.imystery0.R;
@@ -19,6 +19,7 @@ import java.util.List;
 public class RecordActivity extends Activity implements View.OnClickListener
 {
     private ImageButton back;
+    private TextView textDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -29,12 +30,14 @@ public class RecordActivity extends Activity implements View.OnClickListener
         initialization();
 
         back.setOnClickListener(this);
+        textDelete.setOnClickListener(this);
     }
 
     private void initialization()
     {
         ListView listView = (ListView) findViewById(R.id.listRecord);
         back = (ImageButton) findViewById(R.id.back_record);
+        textDelete = (TextView) findViewById(R.id.text_delete);
         List<Msg> msgList = getMsgList();
         HistoryAdapter adapter = new HistoryAdapter(msgList, this.getApplicationContext());
         listView.setAdapter(adapter);
@@ -43,7 +46,14 @@ public class RecordActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        finish();
+        switch (v.getId())
+        {
+            case R.id.back_record:
+                finish();
+                break;
+            case R.id.text_delete:
+                break;
+        }
     }
 
     private List<Msg> getMsgList()
