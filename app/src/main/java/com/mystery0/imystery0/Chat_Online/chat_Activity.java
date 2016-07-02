@@ -1,5 +1,6 @@
 package com.mystery0.imystery0.Chat_Online;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -7,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -100,6 +100,7 @@ public class chat_Activity extends Activity implements View.OnClickListener
                 msgAdapter.notifyDataSetChanged();
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler()
     {
         @Override
@@ -146,7 +147,6 @@ public class chat_Activity extends Activity implements View.OnClickListener
                 HttpURLConnection connection = null;
                 String text = null;
                 String c = Change.convertStringToUTF8(content);
-                Log.i("info", c);
                 try
                 {
                     URL url = new URL("http://www.tuling123.com/openapi/api?key=a1d749c50677714e45b6b5a0f33c04e6&info=" + c);

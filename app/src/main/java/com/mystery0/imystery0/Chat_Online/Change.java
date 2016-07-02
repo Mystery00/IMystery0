@@ -18,7 +18,7 @@ public class Change
         {
             return null;
         }
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try
         {
             char c;
