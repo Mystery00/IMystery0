@@ -13,7 +13,7 @@ import cn.bmob.push.PushConstants;
  * Created by myste on 2016-6-13-0013.
  * 推送接收器
  */
-public class MyPushMessageReceiver extends BroadcastReceiver
+public class PushMessageReceiver extends BroadcastReceiver
 {
     @Override
     public void onReceive(Context context, Intent intent)

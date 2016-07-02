@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.log_in_java;
+package com.mystery0.imystery0.Login_Register;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

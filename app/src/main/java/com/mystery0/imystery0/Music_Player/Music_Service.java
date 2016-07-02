@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.Music_player;
+package com.mystery0.imystery0.Music_Player;
 
 import android.app.Service;
 import android.content.Intent;
@@ -12,9 +12,10 @@ import java.io.IOException;
  * Created by myste on 2016-6-4-0004.
  * 音乐播放服务
  */
-public class MusicPlayerService extends Service
+public class Music_Service extends Service
 {
     static private MediaPlayer mp;
+
     @Override
     public void onCreate()
     {
@@ -35,10 +36,10 @@ public class MusicPlayerService extends Service
 
     static void Prepare(String path)
     {
-        mp=new MediaPlayer();
+        mp = new MediaPlayer();
         try
         {
-            if(mp.isPlaying())
+            if (mp.isPlaying())
             {
                 mp.stop();
                 mp.release();
@@ -50,7 +51,7 @@ public class MusicPlayerService extends Service
         } catch (IOException e)
         {
             e.printStackTrace();
-            Log.i("error","错误!!!!!!!");
+            Log.i("error", "错误!!!!!!!");
         }
     }
 

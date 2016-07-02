@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.Music_player;
+package com.mystery0.imystery0.Music_Player;
 
 import android.content.ContentResolver;
 import android.database.Cursor;

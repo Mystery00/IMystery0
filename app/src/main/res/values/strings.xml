@@ -1,21 +1,6 @@
 <resources>
-    <string name="app_name">iMystery0</string>
-    <string name="hint_username">请输入用户名</string>
-    <string name="hint_password">请输入密码</string>
-    <string name="button_name1">登录</string>
-    <string name="button_name2">注册</string>
-    <string name="text1">记住我</string>
-    <string name="text2">忘记密码?</string>
-    <string name="text3">加入我们!</string>
-    <string name="feedback_text1">意见反馈</string>
-    <string name="feedback_text2">请输入您遇到的问题:</string>
-    <string name="feedback_text3">请输入您的联系方式:</string>
-    <string name="feed_back_button">提交</string>
-    <string name="music_search">扫描</string>
-    <string name="music_title">音乐播放器</string>
-    <string name="chat_hint">说点什么吧</string>
-    <string name="history">历史记录</string>
-    <string name="history_delete">删除全部</string>
+
+    <!--图片描述-->
     <string name="des_weather_img">天气图片</string>
     <string name="des_location_img">天气图片</string>
     <string name="des_back_img">返回上一级</string>
@@ -35,4 +20,23 @@
     <string name="des_splash_img">闪屏</string>
     <string name="des_viewpager_img">viewpager</string>
     <string name="des_viewpagerButton_img">立即体验</string>
+
+    <!--字符串引用-->
+    <string name="app_name">iMystery0</string>
+    <string name="hint_username">请输入用户名</string>
+    <string name="hint_password">请输入密码</string>
+    <string name="button_name1">登录</string>
+    <string name="button_name2">注册</string>
+    <string name="text1">记住我</string>
+    <string name="text2">忘记密码?</string>
+    <string name="text3">加入我们!</string>
+    <string name="feedback_text1">意见反馈</string>
+    <string name="feedback_text2">请输入您遇到的问题:</string>
+    <string name="feedback_text3">请输入您的联系方式:</string>
+    <string name="feed_back_button">提交</string>
+    <string name="music_search">扫描</string>
+    <string name="music_title">音乐播放器</string>
+    <string name="chat_hint">说点什么吧</string>
+    <string name="history">历史记录</string>
+    <string name="history_delete">删除全部</string>
 </resources>

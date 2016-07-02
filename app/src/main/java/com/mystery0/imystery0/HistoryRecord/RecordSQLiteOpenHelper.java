@@ -11,7 +11,6 @@ import com.mystery0.imystery0.Chat_Online.Msg;
  */
 public class RecordSQLiteOpenHelper extends SQLiteOpenHelper
 {
-    private SQLiteDatabase db;
 
     public RecordSQLiteOpenHelper(Context context, String name)
     {
@@ -21,7 +20,6 @@ public class RecordSQLiteOpenHelper extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        this.db = db;
         db.execSQL(
                 "CREATE TABLE history_list(id integer primary key autoincrement,content text not null,type integer);");
         //建表

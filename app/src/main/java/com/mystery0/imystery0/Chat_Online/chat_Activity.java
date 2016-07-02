@@ -14,7 +14,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.mystery0.imystery0.HistoryRecord.RecordActivity;
+import com.mystery0.imystery0.HistoryRecord.HistoryRecord_Activity;
 import com.mystery0.imystery0.HistoryRecord.RecordSQLiteOpenHelper;
 import com.mystery0.imystery0.R;
 
@@ -86,7 +86,7 @@ public class chat_Activity extends Activity implements View.OnClickListener
                 finish();
                 break;
             case R.id.history:
-                startActivity(new Intent(chat_Activity.this, RecordActivity.class));
+                startActivity(new Intent(chat_Activity.this, HistoryRecord_Activity.class));
                 break;
         }
     }

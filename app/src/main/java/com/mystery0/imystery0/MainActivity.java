@@ -16,11 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mystery0.imystery0.Chat_Online.chat_Activity;
-import com.mystery0.imystery0.Feed_back.Feedback_main;
+import com.mystery0.imystery0.Feed_back.Feedback_Activity;
 import com.mystery0.imystery0.Location.ILocationCallback;
-import com.mystery0.imystery0.Location.List.Province_list;
+import com.mystery0.imystery0.Location.List.Province_List;
 import com.mystery0.imystery0.Location.LocationHelper;
-import com.mystery0.imystery0.Music_player.MusicActivity;
+import com.mystery0.imystery0.Music_Player.Music_Activity;
 import com.mystery0.imystery0.Weather.FindCode;
 import com.mystery0.imystery0.Weather.Get;
 import com.mystery0.imystery0.Weather.GetTemp;
@@ -361,7 +361,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     @Override
     public void onClick(View v)
     {
-        Intent intent = new Intent(MainActivity.this, Province_list.class);
+        Intent intent = new Intent(MainActivity.this, Province_List.class);
         startActivityForResult(intent, REQUST);
     }
 
@@ -374,13 +374,13 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         switch (position + 1)
         {
             case 1:
-                startActivity(new Intent(MainActivity.this, MusicActivity.class));
+                startActivity(new Intent(MainActivity.this, Music_Activity.class));
                 break;
             case 2:
                 startActivity(new Intent(MainActivity.this, chat_Activity.class));
                 break;
             case 3:
-                startActivity(new Intent(MainActivity.this, Feedback_main.class));
+                startActivity(new Intent(MainActivity.this, Feedback_Activity.class));
                 break;
         }
     }
