@@ -33,7 +33,7 @@ public class Feedback_Activity extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.feed_back);
+        setContentView(R.layout.activity_feed_back);
 
         Bmob.initialize(this, "7316434f9448bb798f410da5d00b1b1c");
         BmobPush.startWork(this);

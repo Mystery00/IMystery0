@@ -31,13 +31,16 @@ public class Log_in extends Activity implements View.OnClickListener
     private EditText user_name;
     private EditText pass_word;
     private ImageView RememberMe;
+    private String username;
+    private String password;
+    final ProgressDialog progressDialog = new ProgressDialog(Log_in.this);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         Bmob.initialize(this, "7316434f9448bb798f410da5d00b1b1c");
-        setContentView(R.layout.log_in);
+        setContentView(R.layout.activity_log_in);
 
         initialization();
     }
@@ -70,6 +73,7 @@ public class Log_in extends Activity implements View.OnClickListener
             user_name.setText(preferences.getString("username", ""));
             pass_word.setText(preferences.getString("password", ""));
             RememberMe.setImageResource(R.drawable.point_1);
+            login();
         } else
         {
             RememberMe.setImageResource(R.drawable.point_0);
@@ -82,13 +86,12 @@ public class Log_in extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.Login_button:
-                final ProgressDialog progressDialog = new ProgressDialog(Log_in.this);
                 progressDialog.setTitle("登录中......");
                 progressDialog.setMessage("Loading...");
                 progressDialog.setCancelable(true);
                 progressDialog.show();
-                String username = user_name.getText().toString();
-                String password = pass_word.getText().toString();
+                username = user_name.getText().toString();
+                password = pass_word.getText().toString();
                 if (isRememberMe)
                 {
                     SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
@@ -97,27 +100,7 @@ public class Log_in extends Activity implements View.OnClickListener
                     editor.putString("password", password);
                     editor.apply();
                 }
-                final BmobUser user = new BmobUser();
-                user.setUsername(username);
-                user.setPassword(password);
-                user.login(Log_in.this, new SaveListener()
-                {
-                    @Override
-                    public void onSuccess()
-                    {
-                        progressDialog.dismiss();
-                        Toast.makeText(Log_in.this, "登陆成功!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Log_in.this, MainActivity.class));
-                        finish();
-                    }
-
-                    @Override
-                    public void onFailure(int i, String s)
-                    {
-                        progressDialog.dismiss();
-                        Toast.makeText(Log_in.this, "账号或密码错误,请重新登陆!", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                login();
                 break;
             case R.id.image_point:
                 if (isRememberMe)
@@ -145,5 +128,30 @@ public class Log_in extends Activity implements View.OnClickListener
                 Toast.makeText(Log_in.this, "此功能正在开发中!", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    private void login()
+    {
+        final BmobUser user = new BmobUser();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.login(Log_in.this, new SaveListener()
+        {
+            @Override
+            public void onSuccess()
+            {
+                progressDialog.dismiss();
+                Toast.makeText(Log_in.this, "登陆成功!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Log_in.this, MainActivity.class));
+                finish();
+            }
+
+            @Override
+            public void onFailure(int i, String s)
+            {
+                progressDialog.dismiss();
+                Toast.makeText(Log_in.this, "账号或密码错误,请重新登陆!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

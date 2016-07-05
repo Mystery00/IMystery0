@@ -63,7 +63,7 @@ public class chat_Activity extends Activity implements View.OnClickListener
         sendButton = (ImageButton) findViewById(R.id.send);
         history = (TextView) findViewById(R.id.history);
         back = (ImageButton) findViewById(R.id.back);
-        msgAdapter = new MsgAdapter(chat_Activity.this, R.layout.msg_item, msgList);
+        msgAdapter = new MsgAdapter(chat_Activity.this, R.layout.item_msg, msgList);
         listView.setAdapter(msgAdapter);
     }
 

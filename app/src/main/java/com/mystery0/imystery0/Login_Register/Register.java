@@ -31,7 +31,7 @@ public class Register extends Activity
     {
         super.onCreate(savedInstanceState);
         Bmob.initialize(this, "7316434f9448bb798f410da5d00b1b1c");
-        setContentView(R.layout.register);
+        setContentView(R.layout.activity_register);
 
         initialization();
 

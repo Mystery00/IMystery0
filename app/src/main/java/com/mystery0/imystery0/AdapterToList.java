@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class AdapterToList
 {
-    public static List<Map<String, Object>> getlist()
+    public static List<Map<String, Object>> getList()
     {
         List<Map<String, Object>> list = new ArrayList<>();
         Map<String, Object> map = new HashMap<>();
@@ -29,6 +29,11 @@ public class AdapterToList
         map.put("pic", R.drawable.feedback_logo);
         map.put("text", "意见反馈");
         list.add(map);
+/*
+        map=new HashMap<>();
+        map.put("pic",R.drawable.setting);
+        map.put("text","个人设置");
+        list.add(map);*/
 
         return list;
     }

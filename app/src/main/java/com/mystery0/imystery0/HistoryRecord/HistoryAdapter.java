@@ -48,7 +48,7 @@ public class HistoryAdapter extends BaseAdapter
     public View getView(int position, View convertView, ViewGroup parent)
     {
         convertView = LayoutInflater.from(context).
-                inflate(R.layout.record_item, null);
+                inflate(R.layout.item_record, null);
         TextView text_person = (TextView) convertView.findViewById(R.id.text_person);
         TextView text_content = (TextView) convertView.findViewById(R.id.text_content);
         Msg msg = msgList.get(position);

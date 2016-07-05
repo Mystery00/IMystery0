@@ -47,57 +47,73 @@ import cn.bmob.v3.update.BmobUpdateAgent;
  */
 public class MainActivity extends Activity implements View.OnClickListener, ILocationCallback, AdapterView.OnItemClickListener
 {
-    private ListView listView;
     private String District;
     private LocationHelper location;
     private FindCode findCode;
+    private String txt;
+
+    private ListView listView;
     private TextView title;
     private TextView date;
+    private ImageView img_code;
+    private ImageView img_refresh;
+
+    /**
+     * 未来六天天气预报
+     */
+    private TextView tmp_0;
     private TextView tmp_1;
     private TextView tmp_2;
     private TextView tmp_3;
     private TextView tmp_4;
     private TextView tmp_5;
     private TextView tmp_6;
+
     private TextView time_1;
     private TextView time_2;
     private TextView time_3;
     private TextView time_4;
     private TextView time_5;
     private TextView time_6;
-    private TextView nowtmp;
-    private ImageView img_code;
+
     private ImageView code_1;
     private ImageView code_2;
     private ImageView code_3;
     private ImageView code_4;
     private ImageView code_5;
     private ImageView code_6;
-    public static final int DATE_0 = 2;
-    public static final int TXT = 4;
-    public static final int NOWTMP = 5;
-    public static final int CODE = 6;
-    public static final int DONE = 7;
-    public static final int LOCATION = 8;
-    public static final int DATE_1 = 9;
-    public static final int TMP_1 = 10;
-    public static final int DATE_2 = 11;
-    public static final int TMP_2 = 12;
-    public static final int DATE_3 = 13;
-    public static final int TMP_3 = 14;
+
+    /**
+     * 静态常量
+     */
+    public static final int TXT = 0;
+    public static final int DONE = 1;
+    public static final int LOCATION = 2;
+    private static final int REQUEST = 3;
+
+    public static final int TMP_0 = 4;
+    public static final int TMP_1 = 5;
+    public static final int TMP_2 = 6;
+    public static final int TMP_3 = 7;
+    public static final int TMP_4 = 8;
+    public static final int TMP_5 = 9;
+    public static final int TMP_6 = 10;
+
+    public static final int DATE_0 = 11;
+    public static final int DATE_1 = 12;
+    public static final int DATE_2 = 13;
+    public static final int DATE_3 = 14;
     public static final int DATE_4 = 15;
-    public static final int TMP_4 = 16;
-    public static final int DATE_5 = 17;
-    public static final int TMP_5 = 18;
-    public static final int DATE_6 = 19;
-    public static final int TMP_6 = 20;
-    public static final int CODE_1 = 21;
-    public static final int CODE_2 = 22;
-    public static final int CODE_3 = 23;
-    public static final int CODE_4 = 24;
-    public static final int CODE_5 = 25;
-    public static final int CODE_6 = 26;
-    private static final int REQUST = 0;
+    public static final int DATE_5 = 16;
+    public static final int DATE_6 = 17;
+
+    public static final int CODE_0 = 18;
+    public static final int CODE_1 = 19;
+    public static final int CODE_2 = 20;
+    public static final int CODE_3 = 21;
+    public static final int CODE_4 = 22;
+    public static final int CODE_5 = 23;
+    public static final int CODE_6 = 24;
 
     /**
      * Handler消息接收判断
@@ -117,17 +133,14 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                     editor.putString("district", District);
                     editor.apply();
                     break;
-                case DATE_0:
-                    date.setText(getTemp.getdate());
-                    editor.putString("date", (String) msg.obj);
-                    editor.apply();
+                case DONE:
+                    Toast.makeText(MainActivity.this, "自动定位完成!", Toast.LENGTH_SHORT).show();
                     break;
-                case NOWTMP:
-                    nowtmp.setText(getTemp.getnowtmp());
-                    editor.putString("nowtmp", (String) msg.obj);
-                    editor.apply();
+                case TXT:
+                    txt = (String) msg.obj;
                     break;
-                case CODE:
+
+                case CODE_0:
                     img_code.setImageResource(Get.get(getTemp.getimg_code()));
                     editor.putString("img_code", (String) msg.obj);
                     editor.apply();
@@ -162,8 +175,11 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                     editor.putString("code_6", (String) msg.obj);
                     editor.apply();
                     break;
-                case DONE:
-                    Toast.makeText(MainActivity.this, "自动定位完成!", Toast.LENGTH_SHORT).show();
+
+                case TMP_0:
+                    tmp_0.setText(getTemp.getnowtmp());
+                    editor.putString("tmp_0", msg.obj + "  " + txt);
+                    editor.apply();
                     break;
                 case TMP_1:
                     tmp_1.setText(getTemp.gettmp_1());
@@ -193,6 +209,12 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 case TMP_6:
                     tmp_6.setText(getTemp.gettmp_6());
                     editor.putString("tmp_6", (String) msg.obj);
+                    editor.apply();
+                    break;
+
+                case DATE_0:
+                    date.setText(getTemp.getdate());
+                    editor.putString("date", (String) msg.obj);
                     editor.apply();
                     break;
                 case DATE_1:
@@ -241,6 +263,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
          */
         title.setOnClickListener(this);
         listView.setOnItemClickListener(this);
+        img_refresh.setOnClickListener(this);
     }
 
     /**
@@ -263,13 +286,15 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         listView = (ListView) findViewById(R.id.list_left_drawer);
         title = (TextView) findViewById(R.id.location);
         date = (TextView) findViewById(R.id.date);
+        img_refresh = (ImageView) findViewById(R.id.refresh);
+
         time_1 = (TextView) findViewById(R.id.time_1);
         time_2 = (TextView) findViewById(R.id.time_2);
         time_3 = (TextView) findViewById(R.id.time_3);
         time_4 = (TextView) findViewById(R.id.time_4);
         time_5 = (TextView) findViewById(R.id.time_5);
         time_6 = (TextView) findViewById(R.id.time_6);
-        nowtmp = (TextView) findViewById(R.id.temperature);
+        tmp_0 = (TextView) findViewById(R.id.temperature);
         tmp_1 = (TextView) findViewById(R.id.tmp_1);
         tmp_2 = (TextView) findViewById(R.id.tmp_2);
         tmp_3 = (TextView) findViewById(R.id.tmp_3);
@@ -298,7 +323,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         time_4.setText(getTemp.getdate_4());
         time_5.setText(getTemp.getdate_5());
         time_6.setText(getTemp.getdate_6());
-        nowtmp.setText(getTemp.getnowtmp());
+        tmp_0.setText(getTemp.getnowtmp());
         tmp_1.setText(getTemp.gettmp_1());
         tmp_2.setText(getTemp.gettmp_2());
         tmp_3.setText(getTemp.gettmp_3());
@@ -314,7 +339,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         code_6.setImageResource(Get.get(getTemp.getCode_6()));
 
         final SimpleAdapter adapter = new SimpleAdapter(
-                this, AdapterToList.getlist(), R.layout.menu_item, new String[]{"pic", "text"}, new int[]{R.id.menu_image, R.id.menu_text}
+                this, AdapterToList.getList(), R.layout.item_nenu, new String[]{"pic", "text"}, new int[]{R.id.menu_image, R.id.menu_text}
         );
         listView.setAdapter(adapter);
 
@@ -341,7 +366,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             District = info;
             title.setText(info);
             String city_code = findCode.Find_Code(this.getApplicationContext(), District);
-            Log.i("info", city_code);
             getWeatherCode(city_code);
             Message message = new Message();
             message.what = DONE;
@@ -361,12 +385,24 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     @Override
     public void onClick(View v)
     {
-        Intent intent = new Intent(MainActivity.this, Province_List.class);
-        startActivityForResult(intent, REQUST);
+        switch (v.getId())
+        {
+            case R.id.location:
+                Intent intent = new Intent(MainActivity.this, Province_List.class);
+                startActivityForResult(intent, REQUEST);
+                break;
+            case R.id.refresh:
+                String city_code = findCode.Find_Code(this.getApplicationContext(), title.getText().toString());
+                Log.i("info", city_code);
+                getWeatherCode(city_code);
+                Message message = new Message();
+                message.what = DONE;
+                handler.sendMessage(message);
+        }
     }
 
     /**
-     * listview点击事件
+     * listView点击事件
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -382,6 +418,9 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             case 3:
                 startActivity(new Intent(MainActivity.this, Feedback_Activity.class));
                 break;
+            case 4:
+                //startActivity(new Intent(MainActivity.this,Setting.class));
+                break;
         }
     }
 
@@ -392,7 +431,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
-        if (requestCode == REQUST)
+        if (requestCode == REQUEST)
             if (resultCode == RESULT_OK)
             {
                 District = data.getStringExtra("code");
@@ -402,7 +441,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 message.obj = District;
                 handler.sendMessage(message);
                 String city_code = findCode.Find_Code(this.getApplicationContext(), District);
-                Log.i("info", city_code);
                 getWeatherCode(city_code);
             }
     }
@@ -449,15 +487,14 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                         conn.disconnect();
                     }
                 }
-                //text="{\"HeWeather data service 3.0\":[{\"aqi\":{\"city\":{\"aqi\":\"104\",\"co\":\"1\",\"no2\":\"27\",\"o3\":\"193\",\"pm10\":\"75\",\"pm25\":\"97\",\"qlty\":\"良\",\"so2\":\"7\"}},\"basic\":{\"city\":\"北京\",\"cnty\":\"中国\",\"id\":\"CN101010100\",\"lat\":\"39.904000\",\"lon\":\"116.391000\",\"update\":{\"loc\":\"2016-06-23 18:51\",\"utc\":\"2016-06-23 10:51\"}},\"daily_forecast\":[{\"astro\":{\"sr\":\"04:46\",\"ss\":\"19:46\"},\"cond\":{\"code_d\":\"101\",\"code_n\":\"101\",\"txt_d\":\"多云\",\"txt_n\":\"多云\"},\"date\":\"2016-06-23\",\"hum\":\"12\",\"pcpn\":\"0.0\",\"pop\":\"0\",\"pres\":\"1003\",\"tmp\":{\"max\":\"35\",\"min\":\"21\"},\"vis\":\"10\",\"wind\":{\"deg\":\"304\",\"dir\":\"无持续风向\",\"sc\":\"微风\",\"spd\":\"2\"}},{\"astro\":{\"sr\":\"04:46\",\"ss\":\"19:46\"},\"cond\":{\"code_d\":\"101\",\"code_n\":\"101\",\"txt_d\":\"多云\",\"txt_n\":\"多云\"},\"date\":\"2016-06-24\",\"hum\":\"12\",\"pcpn\":\"0.0\",\"pop\":\"0\",\"pres\":\"1005\",\"tmp\":{\"max\":\"32\",\"min\":\"20\"},\"vis\":\"10\",\"wind\":{\"deg\":\"359\",\"dir\":\"无持续风向\",\"sc\":\"微风\",\"spd\":\"8\"}},{\"astro\":{\"sr\":\"04:47\",\"ss\":\"19:47\"},\"cond\":{\"code_d\":\"100\",\"code_n\":\"100\",\"txt_d\":\"晴\",\"txt_n\":\"晴\"},\"date\":\"2016-06-25\",\"hum\":\"10\",\"pcpn\":\"0.0\",\"pop\":\"0\",\"pres\":\"1005\",\"tmp\":{\"max\":\"34\",\"min\":\"22\"},\"vis\":\"10\",\"wind\":{\"deg\":\"319\",\"dir\":\"无持续风向\",\"sc\":\"微风\",\"spd\":\"1\"}},{\"astro\":{\"sr\":\"04:47\",\"ss\":\"19:47\"},\"cond\":{\"code_d\":\"101\",\"code_n\":\"101\",\"txt_d\":\"多云\",\"txt_n\":\"多云\"},\"date\":\"2016-06-26\",\"hum\":\"9\",\"pcpn\":\"0.0\",\"pop\":\"2\",\"pres\":\"1002\",\"tmp\":{\"max\":\"36\",\"min\":\"24\"},\"vis\":\"10\",\"wind\":{\"deg\":\"166\",\"dir\":\"无持续风向\",\"sc\":\"微风\",\"spd\":\"9\"}},{\"astro\":{\"sr\":\"04:47\",\"ss\":\"19:47\"},\"cond\":{\"code_d\":\"302\",\"code_n\":\"302\",\"txt_d\":\"雷阵雨\",\"txt_n\":\"雷阵雨\"},\"date\":\"2016-06-27\",\"hum\":\"17\",\"pcpn\":\"0.2\",\"pop\":\"60\",\"pres\":\"1003\",\"tmp\":{\"max\":\"32\",\"min\":\"23\"},\"vis\":\"10\",\"wind\":{\"deg\":\"191\",\"dir\":\"无持续风向\",\"sc\":\"微风\",\"spd\":\"1\"}},{\"astro\":{\"sr\":\"04:48\",\"ss\":\"19:47\"},\"cond\":{\"code_d\":\"302\",\"code_n\":\"302\",\"txt_d\":\"雷阵雨\",\"txt_n\":\"雷阵雨\"},\"date\":\"2016-06-28\",\"hum\":\"36\",\"pcpn\":\"9.3\",\"pop\":\"54\",\"pres\":\"1005\",\"tmp\":{\"max\":\"29\",\"min\":\"20\"},\"vis\":\"7\",\"wind\":{\"deg\":\"170\",\"dir\":\"无持续风向\",\"sc\":\"微风\",\"spd\":\"6\"}},{\"astro\":{\"sr\":\"04:48\",\"ss\":\"19:47\"},\"cond\":{\"code_d\":\"101\",\"code_n\":\"101\",\"txt_d\":\"多云\",\"txt_n\":\"多云\"},\"date\":\"2016-06-29\",\"hum\":\"54\",\"pcpn\":\"21.8\",\"pop\":\"50\",\"pres\":\"1005\",\"tmp\":{\"max\":\"31\",\"min\":\"21\"},\"vis\":\"10\",\"wind\":{\"deg\":\"166\",\"dir\":\"无持续风向\",\"sc\":\"微风\",\"spd\":\"9\"}}],\"hourly_forecast\":[{\"date\":\"2016-06-23 19:00\",\"hum\":\"24\",\"pop\":\"0\",\"pres\":\"1002\",\"tmp\":\"35\",\"wind\":{\"deg\":\"268\",\"dir\":\"西风\",\"sc\":\"微风\",\"spd\":\"13\"}},{\"date\":\"2016-06-23 22:00\",\"hum\":\"24\",\"pop\":\"0\",\"pres\":\"1004\",\"tmp\":\"33\",\"wind\":{\"deg\":\"308\",\"dir\":\"西北风\",\"sc\":\"微风\",\"spd\":\"14\"}}],\"now\":{\"cond\":{\"code\":\"104\",\"txt\":\"阴\"},\"fl\":\"31\",\"hum\":\"47\",\"pcpn\":\"0\",\"pres\":\"1002\",\"tmp\":\"30\",\"vis\":\"10\",\"wind\":{\"deg\":\"150\",\"dir\":\"西南风\",\"sc\":\"4-5\",\"spd\":\"21\"}},\"status\":\"ok\",\"suggestion\":{\"comf\":{\"brf\":\"较不舒适\",\"txt\":\"白天天气多云，同时会感到有些热，不很舒适。\"},\"cw\":{\"brf\":\"较适宜\",\"txt\":\"较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。\"},\"drsg\":{\"brf\":\"炎热\",\"txt\":\"天气炎热，建议着短衫、短裙、短裤、薄型T恤衫等清凉夏季服装。\"},\"flu\":{\"brf\":\"少发\",\"txt\":\"各项气象条件适宜，发生感冒机率较低。但请避免长期处于空调房间中，以防感冒。\"},\"sport\":{\"brf\":\"较适宜\",\"txt\":\"天气较好，但由于风力较大，推荐您在室内进行低强度运动，若在户外运动请注意避风。\"},\"trav\":{\"brf\":\"适宜\",\"txt\":\"天气较好，温度稍高，幸好风稍大，会缓解稍热的天气。适宜旅游，可不要错过机会呦！\"},\"uv\":{\"brf\":\"中等\",\"txt\":\"属中等强度紫外线辐射天气，外出时建议涂擦SPF高于15、PA+的防晒护肤品，戴帽子、太阳镜。\"}}}]}";
                 /**
                  * 解析数据
                  */
                 try
                 {
                     JSONObject jsonObject = new JSONObject(text);
-                    getnow(jsonObject.getString("HeWeather data service 3.0"));
-                    getdaily_forecast(jsonObject.getString("HeWeather data service 3.0"));
+                    getNow(jsonObject.getString("HeWeather data service 3.0"));
+                    getDailyForecast(jsonObject.getString("HeWeather data service 3.0"));
                 } catch (JSONException e)
                 {
                     e.printStackTrace();
@@ -466,7 +503,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         }).start();
     }
 
-    private void getnow(String text)//获取now 实况天气
+    private void getNow(String text)//获取now 实况天气
     {
         try
         {
@@ -474,8 +511,8 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             for (int i = 0; i < jsonArray.length(); i++)
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                getcond(jsonObject.getString("now"));
-                gettmp(jsonObject.getString("now"));
+                getCond(jsonObject.getString("now"));
+                getTmp(jsonObject.getString("now"));
             }
         } catch (JSONException e)
         {
@@ -483,7 +520,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         }
     }
 
-    private void getdaily_forecast(String text)//获取daily_forecast 天气预报
+    private void getDailyForecast(String text)//获取daily_forecast 天气预报
     {
         try
         {
@@ -491,13 +528,13 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             for (int i = 0; i < jsonArray.length(); i++)
             {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                getday_0(jsonObject.getString("daily_forecast"));
-                getday_1(jsonObject.getString("daily_forecast"));
-                getday_2(jsonObject.getString("daily_forecast"));
-                getday_3(jsonObject.getString("daily_forecast"));
-                getday_4(jsonObject.getString("daily_forecast"));
-                getday_5(jsonObject.getString("daily_forecast"));
-                getday_6(jsonObject.getString("daily_forecast"));
+                getDay_0(jsonObject.getString("daily_forecast"));
+                getDay_1(jsonObject.getString("daily_forecast"));
+                getDay_2(jsonObject.getString("daily_forecast"));
+                getDay_3(jsonObject.getString("daily_forecast"));
+                getDay_4(jsonObject.getString("daily_forecast"));
+                getDay_5(jsonObject.getString("daily_forecast"));
+                getDay_6(jsonObject.getString("daily_forecast"));
             }
         } catch (JSONException e)
         {
@@ -505,7 +542,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         }
     }
 
-    private void getday_0(String text)//获取今日信息
+    private void getDay_0(String text)//获取今日信息
     {
         String date = null;
         try
@@ -523,7 +560,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message1);
     }
 
-    private void getday_1(String text)
+    private void getDay_1(String text)
     {
         String date = null;
         String tmp = null;
@@ -534,7 +571,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
-            getcode_1(jsonObject.getString("cond"));
+            getCode_1(jsonObject.getString("cond"));
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -549,7 +586,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message2);
     }
 
-    private void getday_2(String text)
+    private void getDay_2(String text)
     {
         String date = null;
         String tmp = null;
@@ -560,7 +597,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
-            getcode_2(jsonObject.getString("cond"));
+            getCode_2(jsonObject.getString("cond"));
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -575,7 +612,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message2);
     }
 
-    private void getday_3(String text)
+    private void getDay_3(String text)
     {
         String date = null;
         String tmp = null;
@@ -586,7 +623,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
-            getcode_3(jsonObject.getString("cond"));
+            getCode_3(jsonObject.getString("cond"));
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -601,7 +638,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message2);
     }
 
-    private void getday_4(String text)
+    private void getDay_4(String text)
     {
         String date = null;
         String tmp = null;
@@ -612,7 +649,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
-            getcode_4(jsonObject.getString("cond"));
+            getCode_4(jsonObject.getString("cond"));
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -627,7 +664,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message2);
     }
 
-    private void getday_5(String text)
+    private void getDay_5(String text)
     {
         String date = null;
         String tmp = null;
@@ -638,7 +675,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
-            getcode_5(jsonObject.getString("cond"));
+            getCode_5(jsonObject.getString("cond"));
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -653,7 +690,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message2);
     }
 
-    private void getday_6(String text)
+    private void getDay_6(String text)
     {
         String date = null;
         String tmp = null;
@@ -664,7 +701,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             date = jsonObject.getString("date");
             JSONObject today = new JSONObject(jsonObject.getString("tmp"));
             tmp = today.getString("min") + "℃-----" + today.getString("max") + "℃";
-            getcode_6(jsonObject.getString("cond"));
+            getCode_6(jsonObject.getString("cond"));
         } catch (JSONException e)
         {
             e.printStackTrace();
@@ -679,20 +716,20 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message2);
     }
 
-    private void getcond(String text)//获取cond 天气状况
+    private void getCond(String text)//获取cond 天气状况
     {
         try
         {
             JSONObject jsonObject = new JSONObject(text);
-            gettxt(jsonObject.getString("cond"));
-            getcode(jsonObject.getString("cond"));
+            getTxt(jsonObject.getString("cond"));
+            getCode(jsonObject.getString("cond"));
         } catch (JSONException e)
         {
             e.printStackTrace();
         }
     }
 
-    private void gettxt(String text)//获取txt 天气描述
+    private void getTxt(String text)//获取txt 天气描述
     {
         String weather_txt = null;
         try
@@ -709,24 +746,24 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message);
     }
 
-    private void gettmp(String text)//获取tmp 当前温度(摄氏度)
+    private void getTmp(String text)//获取tmp 当前温度(摄氏度)
     {
-        String nowtmp = null;
+        String nowTmp = null;
         try
         {
             JSONObject jsonObject = new JSONObject(text);
-            nowtmp = jsonObject.getString("tmp") + "℃";
+            nowTmp = jsonObject.getString("tmp") + "℃";
         } catch (JSONException e)
         {
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = NOWTMP;
-        message.obj = nowtmp;
+        message.what = TMP_0;
+        message.obj = nowTmp;
         handler.sendMessage(message);
     }
 
-    private void getcode(String text)//获取code 天气代码
+    private void getCode(String text)//获取code 天气代码
     {
         String img_code = null;
         try
@@ -738,7 +775,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = CODE;
+        message.what = CODE_0;
         message.obj = img_code;
         handler.sendMessage(message);
         Message message1 = new Message();
@@ -746,7 +783,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message1);
     }
 
-    private void getcode_1(String text)
+    private void getCode_1(String text)
     {
 
         String img_code = null;
@@ -764,7 +801,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message);
     }
 
-    private void getcode_2(String text)
+    private void getCode_2(String text)
     {
 
         String img_code = null;
@@ -782,7 +819,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message);
     }
 
-    private void getcode_3(String text)
+    private void getCode_3(String text)
     {
 
         String img_code = null;
@@ -800,7 +837,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message);
     }
 
-    private void getcode_4(String text)
+    private void getCode_4(String text)
     {
 
         String img_code = null;
@@ -818,7 +855,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message);
     }
 
-    private void getcode_5(String text)
+    private void getCode_5(String text)
     {
 
         String img_code = null;
@@ -836,7 +873,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         handler.sendMessage(message);
     }
 
-    private void getcode_6(String text)
+    private void getCode_6(String text)
     {
 
         String img_code = null;

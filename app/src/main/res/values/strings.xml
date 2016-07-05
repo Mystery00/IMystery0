@@ -20,6 +20,7 @@
     <string name="des_splash_img">闪屏</string>
     <string name="des_viewpager_img">viewpager</string>
     <string name="des_viewpagerButton_img">立即体验</string>
+    <string name="des_refresh_img">刷新</string>
 
     <!--字符串引用-->
     <string name="app_name">iMystery0</string>

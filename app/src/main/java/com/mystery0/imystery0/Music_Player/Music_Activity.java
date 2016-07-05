@@ -38,7 +38,7 @@ public class Music_Activity extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.music_layout);
+        setContentView(R.layout.activity_music_layout);
 
         initialization();
     }

@@ -36,7 +36,7 @@ public class Viewpager extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.viewpager);
+        setContentView(R.layout.activity_viewpager);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         mLinearLayout = (LinearLayout) findViewById(R.id.ll_points);//小圆点列表
@@ -47,9 +47,9 @@ public class Viewpager extends Activity
         viewList = new ArrayList<View>();
 
 
-        viewList.add(inflater.inflate(R.layout.viewpager_1,null));
-        viewList.add(inflater.inflate(R.layout.viewpager_2,null));
-        View view=inflater.inflate(R.layout.viewpager_last,null);
+        viewList.add(inflater.inflate(R.layout.activity_viewpager_1, null));
+        viewList.add(inflater.inflate(R.layout.activity_viewpager_2, null));
+        View view = inflater.inflate(R.layout.activity_viewpager_last, null);
         viewList.add(view);
 
         Set_Res();

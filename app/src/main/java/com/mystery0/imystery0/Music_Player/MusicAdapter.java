@@ -63,7 +63,7 @@ public class MusicAdapter extends BaseAdapter
         {
             vc = new ViewContainer();
             convertView = LayoutInflater.from(context).
-                    inflate(R.layout.music_item, null);
+                    inflate(R.layout.item_music, null);
             vc.music_title = (TextView) convertView.findViewById(R.id.music_title);
             vc.music_artist = (TextView) convertView.findViewById(R.id.music_Artist);
             vc.music_duration = (TextView) convertView.findViewById(R.id.music_duration);
