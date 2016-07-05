@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -90,6 +89,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     public static final int DONE = 1;
     public static final int LOCATION = 2;
     private static final int REQUEST = 3;
+    private static final int REFRESH = 25;
 
     public static final int TMP_0 = 4;
     public static final int TMP_1 = 5;
@@ -134,14 +134,19 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                     editor.apply();
                     break;
                 case DONE:
+                    editor.putString("district", (String) msg.obj);
+                    editor.apply();
                     Toast.makeText(MainActivity.this, "自动定位完成!", Toast.LENGTH_SHORT).show();
                     break;
                 case TXT:
                     txt = (String) msg.obj;
                     break;
+                case REFRESH:
+                    Toast.makeText(MainActivity.this, "刷新成功!", Toast.LENGTH_SHORT).show();
+                    break;
 
                 case CODE_0:
-                    img_code.setImageResource(Get.get(getTemp.getimg_code()));
+                    img_code.setImageResource(Get.get(getTemp.getCode_0()));
                     editor.putString("img_code", (String) msg.obj);
                     editor.apply();
                     break;
@@ -177,73 +182,73 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                     break;
 
                 case TMP_0:
-                    tmp_0.setText(getTemp.getnowtmp());
+                    tmp_0.setText(getTemp.getTmp_0());
                     editor.putString("tmp_0", msg.obj + "  " + txt);
                     editor.apply();
                     break;
                 case TMP_1:
-                    tmp_1.setText(getTemp.gettmp_1());
+                    tmp_1.setText(getTemp.getTmp_1());
                     editor.putString("tmp_1", (String) msg.obj);
                     editor.apply();
                     break;
                 case TMP_2:
-                    tmp_2.setText(getTemp.gettmp_2());
+                    tmp_2.setText(getTemp.getTmp_2());
                     editor.putString("tmp_2", (String) msg.obj);
                     editor.apply();
                     break;
                 case TMP_3:
-                    tmp_3.setText(getTemp.gettmp_3());
+                    tmp_3.setText(getTemp.getTmp_3());
                     editor.putString("tmp_3", (String) msg.obj);
                     editor.apply();
                     break;
                 case TMP_4:
-                    tmp_4.setText(getTemp.gettmp_4());
+                    tmp_4.setText(getTemp.getTmp_4());
                     editor.putString("tmp_4", (String) msg.obj);
                     editor.apply();
                     break;
                 case TMP_5:
-                    tmp_5.setText(getTemp.gettmp_5());
+                    tmp_5.setText(getTemp.getTmp_5());
                     editor.putString("tmp_5", (String) msg.obj);
                     editor.apply();
                     break;
                 case TMP_6:
-                    tmp_6.setText(getTemp.gettmp_6());
+                    tmp_6.setText(getTemp.getTmp_6());
                     editor.putString("tmp_6", (String) msg.obj);
                     editor.apply();
                     break;
 
                 case DATE_0:
-                    date.setText(getTemp.getdate());
+                    date.setText(getTemp.getDate_0());
                     editor.putString("date", (String) msg.obj);
                     editor.apply();
                     break;
                 case DATE_1:
-                    time_1.setText(getTemp.getdate_1());
+                    time_1.setText(getTemp.getDate_1());
                     editor.putString("date_1", (String) msg.obj);
                     editor.apply();
                     break;
                 case DATE_2:
-                    time_2.setText(getTemp.getdate_2());
+                    time_2.setText(getTemp.getDate_2());
                     editor.putString("date_2", (String) msg.obj);
                     editor.apply();
                     break;
                 case DATE_3:
-                    time_3.setText(getTemp.getdate_3());
+                    time_3.setText(getTemp.getDate_3());
                     editor.putString("date_3", (String) msg.obj);
                     editor.apply();
                     break;
                 case DATE_4:
-                    time_4.setText(getTemp.getdate_4());
+                    time_4.setText(getTemp.getDate_4());
                     editor.putString("date_4", (String) msg.obj);
                     editor.apply();
                     break;
                 case DATE_5:
-                    time_5.setText(getTemp.getdate_5());
+                    time_5.setText(getTemp.getDate_5());
                     editor.putString("date_5", (String) msg.obj);
                     editor.apply();
                     break;
                 case DATE_6:
-                    time_6.setText(getTemp.getdate_6());
+                    time_6.setText(getTemp.getDate_6());
                     editor.putString("date_6", (String) msg.obj);
                     editor.apply();
                     break;
@@ -316,21 +321,21 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
          * 读取缓存
          */
         title.setText(getTemp.getDistrict());
-        date.setText(getTemp.getdate());
-        time_1.setText(getTemp.getdate_1());
-        time_2.setText(getTemp.getdate_2());
-        time_3.setText(getTemp.getdate_3());
-        time_4.setText(getTemp.getdate_4());
-        time_5.setText(getTemp.getdate_5());
-        time_6.setText(getTemp.getdate_6());
-        tmp_0.setText(getTemp.getnowtmp());
-        tmp_1.setText(getTemp.gettmp_1());
-        tmp_2.setText(getTemp.gettmp_2());
-        tmp_3.setText(getTemp.gettmp_3());
-        tmp_4.setText(getTemp.gettmp_4());
-        tmp_5.setText(getTemp.gettmp_5());
-        tmp_6.setText(getTemp.gettmp_6());
-        img_code.setImageResource(Get.get(getTemp.getimg_code()));
+        date.setText(getTemp.getDate_0());
+        time_1.setText(getTemp.getDate_1());
+        time_2.setText(getTemp.getDate_2());
+        time_3.setText(getTemp.getDate_3());
+        time_4.setText(getTemp.getDate_4());
+        time_5.setText(getTemp.getDate_5());
+        time_6.setText(getTemp.getDate_6());
+        tmp_0.setText(getTemp.getTmp_0());
+        tmp_1.setText(getTemp.getTmp_1());
+        tmp_2.setText(getTemp.getTmp_2());
+        tmp_3.setText(getTemp.getTmp_3());
+        tmp_4.setText(getTemp.getTmp_4());
+        tmp_5.setText(getTemp.getTmp_5());
+        tmp_6.setText(getTemp.getTmp_6());
+        img_code.setImageResource(Get.get(getTemp.getCode_0()));
         code_1.setImageResource(Get.get(getTemp.getCode_1()));
         code_2.setImageResource(Get.get(getTemp.getCode_2()));
         code_3.setImageResource(Get.get(getTemp.getCode_3()));
@@ -369,6 +374,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             getWeatherCode(city_code);
             Message message = new Message();
             message.what = DONE;
+            message.obj = District;
             handler.sendMessage(message);
         }
     }
@@ -392,11 +398,12 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 startActivityForResult(intent, REQUEST);
                 break;
             case R.id.refresh:
-                String city_code = findCode.Find_Code(this.getApplicationContext(), title.getText().toString());
-                Log.i("info", city_code);
+                SharedPreferences sharedPreferences = getSharedPreferences("temp", MODE_PRIVATE);
+                GetTemp getTemp = new GetTemp(sharedPreferences);
+                String city_code = findCode.Find_Code(this.getApplicationContext(), getTemp.getDistrict());
                 getWeatherCode(city_code);
                 Message message = new Message();
-                message.what = DONE;
+                message.what = REFRESH;
                 handler.sendMessage(message);
         }
     }
@@ -435,7 +442,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             if (resultCode == RESULT_OK)
             {
                 District = data.getStringExtra("code");
-                Log.i("info", District);
                 Message message = new Message();
                 message.what = LOCATION;
                 message.obj = District;

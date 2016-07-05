@@ -33,7 +33,6 @@ public class Log_in extends Activity implements View.OnClickListener
     private ImageView RememberMe;
     private String username;
     private String password;
-    final ProgressDialog progressDialog = new ProgressDialog(Log_in.this);
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -86,12 +85,7 @@ public class Log_in extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.Login_button:
-                progressDialog.setTitle("登录中......");
-                progressDialog.setMessage("Loading...");
-                progressDialog.setCancelable(true);
-                progressDialog.show();
-                username = user_name.getText().toString();
-                password = pass_word.getText().toString();
+                login();
                 if (isRememberMe)
                 {
                     SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
@@ -100,7 +94,6 @@ public class Log_in extends Activity implements View.OnClickListener
                     editor.putString("password", password);
                     editor.apply();
                 }
-                login();
                 break;
             case R.id.image_point:
                 if (isRememberMe)
@@ -132,6 +125,13 @@ public class Log_in extends Activity implements View.OnClickListener
 
     private void login()
     {
+        final ProgressDialog progressDialog = new ProgressDialog(Log_in.this);
+        progressDialog.setTitle("登录中......");
+        progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+        username = user_name.getText().toString();
+        password = pass_word.getText().toString();
         final BmobUser user = new BmobUser();
         user.setUsername(username);
         user.setPassword(password);

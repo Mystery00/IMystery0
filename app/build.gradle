@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "23.0.3"
     useLibrary 'org.apache.http.legacy'
 
     defaultConfig {
         applicationId "com.mystery0.imystery0"
         minSdkVersion 16
-        targetSdkVersion 23
-        versionCode 31
+        targetSdkVersion 24
+        versionCode 32
         versionName "2.2.1"
     }
     buildTypes {
@@ -25,6 +25,6 @@ dependencies {
     compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
     compile 'cn.bmob.android:bmob-push:0.8'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
     compile files('libs/AMap_Location_V2.5.1_20160616.jar')
 }

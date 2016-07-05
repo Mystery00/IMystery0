@@ -24,7 +24,7 @@ public class GetList
     private String[] citylist = new String[512];
     private String[] districtlist = new String[512];
 
-    public List<Province> getprovince(Context context)
+    public List<Province> getProvince(Context context)
     {
         int i = 0;
         ArrayList<Province> provinces = new ArrayList<>();
@@ -41,7 +41,6 @@ public class GetList
                 provincelist[i] = province.getProvince_name();
                 i++;
             }
-            Log.i("info", "省数量:" + i);
             cursor.close();
         } else
             Log.e("error", "空指针!!!!");
@@ -49,7 +48,7 @@ public class GetList
         return provinces;
     }
 
-    public List<City> getcity(Context context, String mprovince)
+    public List<City> getCity(Context context, String mprovince)
     {
         int i = 0;
         ArrayList<City> cities = new ArrayList<>();
@@ -66,7 +65,6 @@ public class GetList
                 citylist[i] = city.getCity_name();
                 i++;
             }
-            Log.i("info", "市数量:" + i);
             cursor.close();
         } else
             Log.e("error", "空指针!!!!");
@@ -74,7 +72,7 @@ public class GetList
         return cities;
     }
 
-    public List<District> getdistrict(Context context, String mcity)
+    public List<District> getDistrict(Context context, String mcity)
     {
         int i = 0;
         ArrayList<District> districts = new ArrayList<>();
@@ -91,7 +89,6 @@ public class GetList
                 districtlist[i] = district.getDistrict_name();
                 i++;
             }
-            Log.i("info", "县数量:" + i);
             cursor.close();
         } else
             Log.e("error", "空指针!!!!");
@@ -99,27 +96,7 @@ public class GetList
         return districts;
     }
 
-    public String getid(Context context, String mdistrict)
-    {
-        String ID = null;
-        ArrayList<District> districts = new ArrayList<>();
-        ISQLiteOpenHelper isqLiteOpenHelper = new ISQLiteOpenHelper(context, "city_list.db");
-        SQLiteDatabase db = isqLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = db.query(true, "city_list", new String[]{"ID"}, "District=?", new String[]{mdistrict}, null, null, null, null);
-        if (cursor != null)
-        {
-            while (cursor.moveToNext())
-            {
-                ID = cursor.getString(cursor.getColumnIndex("ID"));
-            }
-            cursor.close();
-        } else
-            Log.e("error", "空指针!!!!");
-        db.close();
-        return ID;
-    }
-
-    public String[] getcount(String get)
+    public String[] getCount(String get)
     {
         switch (get)
         {
