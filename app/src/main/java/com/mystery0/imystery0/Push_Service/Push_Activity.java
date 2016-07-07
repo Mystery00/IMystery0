@@ -1,9 +1,9 @@
 package com.mystery0.imystery0.Push_Service;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.DialogInterface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.mystery0.imystery0.R;
@@ -12,7 +12,7 @@ import com.mystery0.imystery0.R;
  * 推送视图
  */
 
-public class Push_Activity extends AppCompatActivity
+public class Push_Activity extends Activity
 {
 
     @Override
@@ -33,9 +33,9 @@ public class Push_Activity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int which)
             {
                 dialog.dismiss();//对话框消失
-                finish();
             }
         });
         builder.create().show();//对话框创建并显示,可异步
+        finish();
     }
 }

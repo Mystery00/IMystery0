@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.mystery0.imystery0"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.mystery0.imystery0">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
@@ -31,12 +32,14 @@
         <activity
             android:name=".Login_Register.Log_in"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator">
         </activity>
         <activity
             android:name=".Login_Register.Register"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator">
         </activity>
         <activity
             android:name=".MainActivity"
@@ -46,7 +49,8 @@
         <activity
             android:name=".Splash_Viewpager.Splash"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -56,24 +60,41 @@
         <activity
             android:name=".Splash_Viewpager.Viewpager"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator">
         </activity>
-        <activity android:name=".Music_Player.Music_Activity">
+        <activity
+            android:name=".Music_Player.Music_Activity"
+            tools:ignore="InnerclassSeparator">
         </activity>
-        <activity android:name=".Feed_back.Feedback_Activity">
+        <activity
+            android:name=".Feed_back.Feedback_Activity"
+            tools:ignore="InnerclassSeparator">
         </activity>
         <activity
             android:name="cn.bmob.v3.update.UpdateDialogActivity"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
-        <activity android:name=".Location.List.City_List">
+        <activity
+            android:name=".Location.List.City_List"
+            tools:ignore="InnerclassSeparator">
         </activity>
-        <activity android:name=".Location.List.District_List">
+        <activity
+            android:name=".Location.List.District_List"
+            tools:ignore="InnerclassSeparator">
         </activity>
-        <activity android:name=".Location.List.Province_List">
+        <activity
+            android:name=".Push_Service.Push_Activity"
+            tools:ignore="InnerclassSeparator">
+        </activity>
+        <activity
+            android:name=".Location.List.Province_List"
+            tools:ignore="InnerclassSeparator">
         </activity>
 
-        <service android:name=".Music_Player.Music_Service">
+        <service
+            android:name=".Music_Player.Music_Service"
+            tools:ignore="InnerclassSeparator">
         </service>
         <service
             android:name="cn.bmob.push.lib.service.PushService"
@@ -103,17 +124,20 @@
         <!-- 第四部中创建的消息接收器，在这里进行注册 -->
         <receiver
             android:name=".Push_Service.PushMessageReceiver"
-            android:exported="false">
+            android:exported="false"
+            tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="cn.bmob.push.action.MESSAGE"/>
             </intent-filter>
         </receiver>
 
-        <activity android:name=".Push_Service.Push_Activity">
+        <activity
+            android:name=".Chat_Online.chat_Activity"
+            tools:ignore="InnerclassSeparator">
         </activity>
-        <activity android:name=".Chat_Online.chat_Activity">
-        </activity>
-        <activity android:name=".HistoryRecord.HistoryRecord_Activity">
+        <activity
+            android:name=".HistoryRecord.HistoryRecord_Activity"
+            tools:ignore="InnerclassSeparator">
         </activity>
     </application>
 

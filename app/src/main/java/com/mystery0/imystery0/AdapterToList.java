@@ -29,11 +29,11 @@ public class AdapterToList
         map.put("pic", R.drawable.feedback_logo);
         map.put("text", "意见反馈");
         list.add(map);
-/*
+
         map=new HashMap<>();
         map.put("pic",R.drawable.setting);
         map.put("text","个人设置");
-        list.add(map);*/
+        list.add(map);
 
         return list;
     }
