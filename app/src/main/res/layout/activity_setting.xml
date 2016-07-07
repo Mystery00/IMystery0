@@ -47,7 +47,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/setting_autoLogin"
         android:layout_height="80dp">
 
         <TextView
@@ -70,13 +69,28 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:id="@+id/setting_"
+        android:id="@+id/setting_feedback"
         android:layout_height="80dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/item_setting_Feedback"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            tools:ignore="RelativeOverlap"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/setting_AboutUS"
+        android:layout_height="80dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/item_setting_AboutUS"
             android:textSize="20sp"
             android:gravity="center_vertical"
             tools:ignore="RelativeOverlap"/>
