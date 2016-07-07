@@ -320,18 +320,19 @@
     <RelativeLayout
         android:layout_width="260dp"
         android:layout_margin="10dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="start">
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:id="@+id/img_head"
+            android:id="@+id/img_head_main"
             android:contentDescription="@string/des_head_img"/>
 
         <ListView
             android:id="@+id/list_left_drawer"
-            android:layout_below="@+id/img_head"
+            android:layout_below="@+id/img_head_main"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
