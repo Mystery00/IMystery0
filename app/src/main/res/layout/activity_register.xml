@@ -12,7 +12,7 @@
         android:contentDescription="@string/des_logo_img"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="60dp"
-        android:src="@drawable/logo"
+        android:src="@drawable/ic_logo"
         android:layout_marginRight="40dp"
         android:layout_marginEnd="40dp"
         android:id="@+id/imageView"/>
@@ -24,7 +24,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/login_edittext_bacgroud"
+        android:background="@drawable/btn_login_edittext"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
         android:id="@+id/re_username_layout"
@@ -49,7 +49,7 @@
             android:contentDescription="@string/des_username_img"
             android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"
-            android:src="@drawable/username"
+            android:src="@drawable/ic_username"
             android:layout_toLeftOf="@id/re_username"
             android:layout_toStartOf="@id/re_username"/>
     </RelativeLayout>
@@ -62,7 +62,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:background="@drawable/login_edittext_bacgroud"
+        android:background="@drawable/btn_login_edittext"
         android:layout_below="@+id/re_username_layout"
         android:layout_height="40dp">
 
@@ -82,7 +82,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:contentDescription="@string/des_password_img"
-            android:src="@drawable/password"
+            android:src="@drawable/ic_password"
             android:layout_marginRight="5dp"
             android:layout_marginEnd="5dp"
             android:layout_centerVertical="true"
@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:id="@+id/register_button"
             android:contentDescription="@string/des_register_img"
-            android:background="@drawable/login_button_background"
+            android:background="@drawable/btn_login_button"
             android:layout_height="match_parent"/>
 
         <TextView

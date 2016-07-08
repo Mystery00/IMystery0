@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HistoryRecord.HistoryRecord_Activity">
+    tools:context=".Activity.HistoryRecordActivity">
 
     <ImageButton
         android:layout_width="40dp"
         android:layout_margin="10dp"
         android:contentDescription="@string/app_name"
-        android:background="@drawable/back_button"
+        android:background="@drawable/btn_back"
         android:id="@+id/back_record"
         android:layout_height="40dp"/>
 

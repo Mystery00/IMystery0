@@ -57,7 +57,7 @@
                     android:layout_toEndOf="@+id/img_weather"
                     android:layout_toRightOf="@+id/img_weather"
                     android:contentDescription="@string/des_location_img"
-                    android:src="@drawable/location"/>
+                    android:src="@drawable/ic_location"/>
 
                 <TextView
                     android:id="@+id/location"
@@ -96,7 +96,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@string/des_refresh_img"
-                    android:src="@drawable/refresh"/>
+                    android:src="@drawable/ic_refresh"/>
             </RelativeLayout>
 
 
@@ -112,7 +112,7 @@
                     android:layout_height="150dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:background="@drawable/weather_back"
+                    android:background="@drawable/bg_weather"
                     android:orientation="vertical">
 
                     <TextView
@@ -146,7 +146,7 @@
                     android:layout_below="@+id/linearLayout_2"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
-                    android:background="@drawable/weather_back"
+                    android:background="@drawable/bg_weather"
                     android:orientation="vertical">
 
                     <TextView
@@ -182,7 +182,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_toLeftOf="@+id/linearLayout_2"
                     android:layout_toStartOf="@+id/linearLayout_2"
-                    android:background="@drawable/weather_back"
+                    android:background="@drawable/bg_weather"
                     android:orientation="vertical">
 
                     <TextView
@@ -218,7 +218,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_toEndOf="@+id/linearLayout_2"
                     android:layout_toRightOf="@+id/linearLayout_2"
-                    android:background="@drawable/weather_back"
+                    android:background="@drawable/bg_weather"
                     android:orientation="vertical">
 
                     <TextView
@@ -255,7 +255,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_toLeftOf="@+id/linearLayout_2"
                     android:layout_toStartOf="@+id/linearLayout_2"
-                    android:background="@drawable/weather_back"
+                    android:background="@drawable/bg_weather"
                     android:orientation="vertical">
 
                     <TextView
@@ -292,7 +292,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_toEndOf="@+id/linearLayout_5"
                     android:layout_toRightOf="@+id/linearLayout_5"
-                    android:background="@drawable/weather_back"
+                    android:background="@drawable/bg_weather"
                     android:orientation="vertical">
 
                     <TextView

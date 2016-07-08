@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".Push_Service.Push_Activity">
+    tools:context=".Activity.PushActivity">
 
 </RelativeLayout>

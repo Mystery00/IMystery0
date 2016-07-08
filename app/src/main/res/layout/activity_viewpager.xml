@@ -28,7 +28,7 @@
             android:id="@+id/v_redpoint"
             android:layout_width="10dip"
             android:layout_height="10dip"
-            android:background="@drawable/point_red" />
+            android:background="@drawable/ic_point_red"/>
     </RelativeLayout>
 
 </RelativeLayout>
