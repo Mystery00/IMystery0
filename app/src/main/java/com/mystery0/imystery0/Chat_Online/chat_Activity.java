@@ -4,13 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,6 +26,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -65,6 +70,18 @@ public class chat_Activity extends Activity implements View.OnClickListener
         back = (ImageButton) findViewById(R.id.back);
         msgAdapter = new MsgAdapter(chat_Activity.this, R.layout.item_msg, msgList);
         listView.setAdapter(msgAdapter);
+
+        SharedPreferences preferences = getSharedPreferences("setting", MODE_PRIVATE);
+        if (preferences.getString("image_chat", "null") != "null")
+        {
+            ImageView background = (ImageView) findViewById(R.id.music_background);
+            File file = new File(preferences.getString("image_chat", ""));
+            if (file.exists())
+            {
+                Bitmap bm = BitmapFactory.decodeFile(preferences.getString("image_chat", ""));
+                background.setImageBitmap(bm);
+            }
+        }
     }
 
     @Override

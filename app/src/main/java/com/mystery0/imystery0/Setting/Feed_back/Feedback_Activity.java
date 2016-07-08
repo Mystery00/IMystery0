@@ -1,4 +1,4 @@
-package com.mystery0.imystery0.Feed_back;
+package com.mystery0.imystery0.Setting.Feed_back;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -92,7 +92,6 @@ public class Feedback_Activity extends Activity implements View.OnClickListener
                 }
                 break;
             case R.id.back_logo:
-                startActivity(new Intent(Feedback_Activity.this, MainActivity.class));
                 finish();
                 break;
         }

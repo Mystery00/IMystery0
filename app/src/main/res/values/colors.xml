@@ -4,4 +4,7 @@
     <color name="viewPager">#E1F8FE</color>
     <color name="chat_hint">#9c9c9c</color>
     <color name="history_head">#009688</color>
+    <color name="history_text">#e225202b</color>
+    <color name="line">#909392</color>
+    <color name="listBackground">#85afa1</color>
 </resources>

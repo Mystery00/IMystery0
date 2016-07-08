@@ -3,6 +3,8 @@ package com.mystery0.imystery0;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,16 +12,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mystery0.imystery0.Chat_Online.chat_Activity;
-import com.mystery0.imystery0.Feed_back.Feedback_Activity;
 import com.mystery0.imystery0.Location.ILocationCallback;
 import com.mystery0.imystery0.Location.List.Province_List;
 import com.mystery0.imystery0.Location.LocationHelper;
 import com.mystery0.imystery0.Music_Player.Music_Activity;
+import com.mystery0.imystery0.Setting.Setting_Activity;
 import com.mystery0.imystery0.Weather.FindCode;
 import com.mystery0.imystery0.Weather.Get;
 import com.mystery0.imystery0.Weather.GetTemp;
@@ -30,6 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -123,7 +127,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         @Override
         public void handleMessage(Message msg)
         {
-            SharedPreferences sharedPreferences = getSharedPreferences("temp", MODE_PRIVATE);
+            SharedPreferences sharedPreferences = getSharedPreferences("weather_temp", MODE_PRIVATE);
             GetTemp getTemp = new GetTemp(sharedPreferences);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             switch (msg.what)
@@ -314,7 +318,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         code_5 = (ImageView) findViewById(R.id.img_5);
         code_6 = (ImageView) findViewById(R.id.img_6);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("temp", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("weather_temp", MODE_PRIVATE);
         GetTemp getTemp = new GetTemp(sharedPreferences);
 
         /**
@@ -347,6 +351,28 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 this, AdapterToList.getList(), R.layout.item_nenu, new String[]{"pic", "text"}, new int[]{R.id.menu_image, R.id.menu_text}
         );
         listView.setAdapter(adapter);
+
+        SharedPreferences preferences = getSharedPreferences("setting", MODE_PRIVATE);
+        if (preferences.getString("image_weather", "null") != "null")
+        {
+            ImageView background = (ImageView) findViewById(R.id.weather_background);
+            File file = new File(preferences.getString("image_weather", ""));
+            if (file.exists())
+            {
+                Bitmap bm = BitmapFactory.decodeFile(preferences.getString("image_weather", ""));
+                background.setImageBitmap(bm);
+            }
+        }
+        if (preferences.getString("image_menu", "null") != "null")
+        {
+            ImageView background = (ImageView) findViewById(R.id.menu_background);
+            File file = new File(preferences.getString("image_menu", ""));
+            if (file.exists())
+            {
+                Bitmap bm = BitmapFactory.decodeFile(preferences.getString("image_menu", ""));
+                background.setImageBitmap(bm);
+            }
+        }
 
         /**
          * 启动自动定位
@@ -398,7 +424,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 startActivityForResult(intent, REQUEST);
                 break;
             case R.id.refresh:
-                SharedPreferences sharedPreferences = getSharedPreferences("temp", MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences("weather_temp", MODE_PRIVATE);
                 GetTemp getTemp = new GetTemp(sharedPreferences);
                 String city_code = findCode.Find_Code(this.getApplicationContext(), getTemp.getDistrict());
                 getWeatherCode(city_code);
@@ -423,10 +449,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 startActivity(new Intent(MainActivity.this, chat_Activity.class));
                 break;
             case 3:
-                startActivity(new Intent(MainActivity.this, Feedback_Activity.class));
-                break;
-            case 4:
-                //startActivity(new Intent(MainActivity.this,Setting.class));
+                startActivity(new Intent(MainActivity.this, Setting_Activity.class));
                 break;
         }
     }

@@ -25,11 +25,6 @@ public class AdapterToList
         map.put("text", "与机器人聊天");
         list.add(map);
 
-        map = new HashMap<>();
-        map.put("pic", R.drawable.feedback_logo);
-        map.put("text", "意见反馈");
-        list.add(map);
-
         map=new HashMap<>();
         map.put("pic",R.drawable.setting);
         map.put("text","个人设置");

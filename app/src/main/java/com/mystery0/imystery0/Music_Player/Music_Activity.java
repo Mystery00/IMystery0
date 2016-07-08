@@ -4,16 +4,21 @@ package com.mystery0.imystery0.Music_Player;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.mystery0.imystery0.Class_class.Music;
 import com.mystery0.imystery0.MainActivity;
 import com.mystery0.imystery0.R;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -123,6 +128,18 @@ public class Music_Activity extends Activity implements View.OnClickListener
         next_button = (ImageButton) findViewById(R.id.next_button);
         music_list = new Music_List();
         intent = new Intent(Music_Activity.this, Music_Service.class);
+
+        SharedPreferences preferences = getSharedPreferences("setting", MODE_PRIVATE);
+        if (preferences.getString("image_music", "null") != "null")
+        {
+            ImageView background = (ImageView) findViewById(R.id.music_background);
+            File file = new File(preferences.getString("image_music", ""));
+            if (file.exists())
+            {
+                Bitmap bm = BitmapFactory.decodeFile(preferences.getString("image_music", ""));
+                background.setImageBitmap(bm);
+            }
+        }
     }
 
     void prepare_music(int position)

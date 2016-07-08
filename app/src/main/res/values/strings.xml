@@ -22,6 +22,8 @@
     <string name="des_viewpagerButton_img">立即体验</string>
     <string name="des_refresh_img">刷新</string>
     <string name="des_head_img">个人资料头像</string>
+    <string name="des_weixin_img">微信公众号</string>
+    <string name="des_background_img">背景图片</string>
 
     <!--字符串引用-->
     <string name="app_name">iMystery0</string>
@@ -47,5 +49,12 @@
     <string name="item_setting_autoLogin">自动登录</string>
     <string name="item_setting_Feedback">意见反馈</string>
     <string name="item_setting_AboutUS">关于我们</string>
+    <string name="text_setting_AboutUS">扫描二维码,获取更多信息!</string>
+    <string name="text_setting_theme_1">登录界面设置</string>
+    <string name="text_setting_theme_2">天气界面设置</string>
+    <string name="text_setting_theme_3">音乐播放器界面设置</string>
+    <string name="text_setting_theme_4">聊天界面设置</string>
+    <string name="text_setting_theme_5">菜单界面设置</string>
+    <string name="text_setting_save">保存设置</string>
 
 </resources>

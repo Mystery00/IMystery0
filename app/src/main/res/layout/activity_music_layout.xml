@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:orientation="vertical"
-              android:background="@drawable/background"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:contentDescription="@string/des_background_img"
+        android:layout_height="match_parent"
+        android:id="@+id/music_background"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_weight="4"
-        android:layout_height="match_parent">
+        android:id="@+id/layout_title"
+        android:layout_alignParentTop="true"
+        android:layout_height="50dp">
 
         <ImageButton
             android:layout_width="40dp"
@@ -39,34 +43,23 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/music_list"/>
-    </LinearLayout>
-
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_weight="4"
-        android:layout_height="match_parent">
+        android:id="@+id/layout_control"
+        android:layout_alignParentBottom="true"
+        android:layout_height="60dp">
 
         <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:contentDescription="@string/des_play_img"
             android:background="@drawable/play_button"
             android:layout_centerInParent="true"
             android:id="@+id/play_button"/>
 
         <ImageButton
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/des_last_img"
@@ -77,7 +70,7 @@
             android:id="@+id/last_button"/>
 
         <ImageButton
-            android:layout_width="60dp"
+            android:layout_width="40dp"
             android:layout_marginLeft="10dp"
             android:contentDescription="@string/des_next_img"
             android:layout_marginStart="10dp"
@@ -85,7 +78,14 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@id/play_button"
             android:layout_toRightOf="@id/play_button"
-            android:layout_height="60dp"
+            android:layout_height="40dp"
             android:id="@+id/next_button"/>
     </RelativeLayout>
-</LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_title"
+        android:layout_above="@+id/layout_control"
+        android:id="@+id/music_list"/>
+</RelativeLayout>

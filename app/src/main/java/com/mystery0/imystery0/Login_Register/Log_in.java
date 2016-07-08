@@ -72,7 +72,10 @@ public class Log_in extends Activity implements View.OnClickListener
             user_name.setText(preferences.getString("username", ""));
             pass_word.setText(preferences.getString("password", ""));
             RememberMe.setImageResource(R.drawable.point_1);
-            login();
+            if (isAutoLogin())
+            {
+                login();
+            }
         } else
         {
             RememberMe.setImageResource(R.drawable.point_0);
@@ -153,5 +156,11 @@ public class Log_in extends Activity implements View.OnClickListener
                 Toast.makeText(Log_in.this, "账号或密码错误,请重新登陆!", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean isAutoLogin()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("isRememberMe", MODE_PRIVATE);
+        return sharedPreferences.getBoolean("isAutoLogin", false);
     }
 }

@@ -5,14 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:id="@+id/weather_background"
+        android:contentDescription="@string/des_background_img"
+        android:layout_height="match_parent"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:id="@+id/relativeLayout"
@@ -320,8 +325,15 @@
     <RelativeLayout
         android:layout_width="260dp"
         android:layout_margin="10dp"
+        android:background="@color/listBackground"
         android:layout_height="match_parent"
         android:layout_gravity="start">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:contentDescription="@string/des_background_img"
+            android:id="@+id/menu_background"
+            android:layout_height="match_parent"/>
 
         <ImageView
             android:layout_width="100dp"
@@ -338,7 +350,7 @@
             android:layout_height="match_parent"
             android:choiceMode="singleChoice"
             android:divider="#FFFFFF"
-            android:dividerHeight="1dp"/>
+            android:dividerHeight="0.1dp"/>
 
     </RelativeLayout>
 
