@@ -335,7 +335,7 @@
             android:id="@+id/menu_background"
             android:layout_height="match_parent"/>
 
-        <ImageView
+        <com.mystery0.imystery0.BaseClass.CircleImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
