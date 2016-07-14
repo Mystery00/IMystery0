@@ -85,7 +85,7 @@ public class LoginActivity extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.Login_button:
-                saveInfo(username, password);
+                saveInfo(user_name.getText().toString(), pass_word.getText().toString());
                 login();
                 break;
             case R.id.image_point:

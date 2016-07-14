@@ -22,7 +22,7 @@ public class HeadFile extends BmobObject
         return username;
     }
 
-    public void setHeadFile(String headFilePath)
+    public void setHeadFilePath(String headFilePath)
     {
         this.headFilePath = headFilePath;
     }

@@ -27,7 +27,7 @@ public class LocationHelper implements AMapLocationListener
 
         locationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         locationClientOption.setNeedAddress(true);
-        locationClientOption.setInterval(10000);
+        //locationClientOption.setInterval(10000);
         locationClient.setLocationOption(locationClientOption);
     }
 

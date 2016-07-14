@@ -31,7 +31,7 @@
             android:gravity="center_vertical"
             tools:ignore="RelativeOverlap"/>
 
-        <ImageView
+        <com.mystery0.imystery0.BaseClass.CircleImageView
             android:layout_width="60dp"
             android:contentDescription="@string/des_head_img"
             android:layout_alignParentEnd="true"

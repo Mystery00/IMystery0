@@ -1,11 +1,15 @@
 package com.mystery0.imystery0.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
@@ -14,6 +18,10 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.mystery0.imystery0.BaseClass.CircleImageView;
+import com.mystery0.imystery0.DatebaseHelper.SaveListenerHelper;
+import com.mystery0.imystery0.ISaveCallback;
+import com.mystery0.imystery0.PublicMethod.GetHeadFile;
 import com.mystery0.imystery0.PublicMethod.GetPath;
 import com.mystery0.imystery0.BaseClass.HeadFile;
 import com.mystery0.imystery0.R;
@@ -22,14 +30,13 @@ import java.io.File;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
 /**
  * Created by myste on 2016-7-7-0007.
  * 设置界面
  */
-public class SettingActivity extends Activity implements Switch.OnCheckedChangeListener, View.OnClickListener
+public class SettingActivity extends Activity implements Switch.OnCheckedChangeListener, View.OnClickListener, ISaveCallback
 {
     private RelativeLayout personalLayout;
     private RelativeLayout themeLayout;
@@ -37,10 +44,11 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
     private RelativeLayout aboutUsLayout;
     private Switch autoLogin;
     private ImageView back;
-    private ImageView head;
+    private CircleImageView head;
     private ProgressDialog progressDialog;
 
     final static public int FILE_SELECT_CODE = 0;
+    final static private int SAVE_DONE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,12 +76,9 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
         aboutUsLayout = (RelativeLayout) findViewById(R.id.setting_AboutUS);
         autoLogin = (Switch) findViewById(R.id.switch_autoLogin);
         back = (ImageView) findViewById(R.id.back_setting);
-        head = (ImageView) findViewById(R.id.img_head_setting);
-
-
+        head = (CircleImageView) findViewById(R.id.img_head_setting);
 
         SharedPreferences sharedPreferences = getSharedPreferences("isRememberMe", MODE_PRIVATE);
-        Log.i("info", "" + sharedPreferences.getBoolean("isRemember", false));
         if (sharedPreferences.getBoolean("isAutoLogin", false))
         {
             autoLogin.setChecked(true);
@@ -81,6 +86,8 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
         {
             autoLogin.setChecked(false);
         }
+
+        SetHeadFile();
     }
 
     @Override
@@ -124,7 +131,6 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                 break;
             case R.id.setting_theme:
                 startActivity(new Intent(SettingActivity.this, ThemeSettingActivity.class));
-                finish();
                 break;
             case R.id.setting_head:
                 getHeadFile();
@@ -174,25 +180,8 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                         SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
                         HeadFile headFile = new HeadFile();
                         headFile.setUsername(sharedPreferences.getString("username", "null"));
-                        headFile.setHeadFile(bmobFile.getFileUrl(SettingActivity.this));
-                        headFile.save(SettingActivity.this, new SaveListener()
-                        {
-                            @Override
-                            public void onSuccess()
-                            {
-                                progressDialog.dismiss();
-                                Toast.makeText(SettingActivity.this, "头像设置成功!", Toast.LENGTH_SHORT).show();
-                                Log.i("info", "成功!");
-                            }
-
-                            @Override
-                            public void onFailure(int i, String s)
-                            {
-                                Log.e("error", "错误代码:" + i);
-                                Log.e("error", "错误信息:" + s);
-                                progressDialog.dismiss();
-                            }
-                        });
+                        headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
+                        headFile.save(SettingActivity.this, new SaveListenerHelper(SettingActivity.this.getApplicationContext(), progressDialog, SettingActivity.this));
                     }
 
                     @Override
@@ -210,6 +199,50 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                     }
                 });
             }
+        }
+    }
+
+    @Override
+    public void GetSaveState(boolean state)
+    {
+        if (state)
+        {
+            Log.i("info", "头像上传成功!");
+            Message message = new Message();
+            message.what = SAVE_DONE;
+            handler.sendMessage(message);
+        }
+    }
+
+    @SuppressLint("HandlerLeak")
+    private Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg)
+        {
+            switch (msg.what)
+            {
+                case SAVE_DONE:
+                    SetHeadFile();
+                    break;
+            }
+        }
+    };
+
+    /**
+     * 设置头像文件
+     */
+    private void SetHeadFile()
+    {
+        GetHeadFile.getHeadFile(this.getApplicationContext());
+        if (BitmapFactory.decodeFile(getCacheDir() + "/head/") != null)
+        {
+            Log.i("info", "头像更改成功!");
+            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/head/"));
+        } else
+        {
+            Log.i("info", "找不到文件!");
+            head.setImageResource(R.drawable.guest);
         }
     }
 }

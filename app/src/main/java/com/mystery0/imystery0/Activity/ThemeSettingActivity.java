@@ -67,7 +67,6 @@ public class ThemeSettingActivity extends Activity implements View.OnClickListen
         switch (view.getId())
         {
             case R.id.back_theme:
-                startActivity(new Intent(ThemeSettingActivity.this, SettingActivity.class));
                 finish();
                 break;
             case R.id.text_setting_theme_chat:

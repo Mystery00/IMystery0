@@ -1,5 +1,6 @@
 package com.mystery0.imystery0.Activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -16,8 +18,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mystery0.imystery0.BaseClass.CircleImageView;
 import com.mystery0.imystery0.DatebaseHelper.LocationHelper;
 import com.mystery0.imystery0.ILocationCallback;
+import com.mystery0.imystery0.PublicMethod.GetHeadFile;
 import com.mystery0.imystery0.PublicMethod.GetWeatherImage;
 import com.mystery0.imystery0.PublicMethod.GetMenuList;
 import com.mystery0.imystery0.PublicMethod.FindCityCode;
@@ -49,6 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     private TextView date;
     private ImageView img_code;
     private ImageView img_refresh;
+    private CircleImageView head;
 
     /**
      * 未来六天天气预报
@@ -111,6 +116,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     /**
      * Handler消息接收判断
      */
+    @SuppressLint("HandlerLeak")
     private Handler handler = new Handler()
     {
         @Override
@@ -130,6 +136,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                     editor.putString("district", (String) msg.obj);
                     editor.apply();
                     Toast.makeText(MainActivity.this, "自动定位完成!", Toast.LENGTH_SHORT).show();
+                    location.stopLocation();
                     break;
                 case TXT:
                     txt = (String) msg.obj;
@@ -285,6 +292,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         title = (TextView) findViewById(R.id.location);
         date = (TextView) findViewById(R.id.date);
         img_refresh = (ImageView) findViewById(R.id.refresh);
+        head = (CircleImageView) findViewById(R.id.img_head_main);
 
         time_1 = (TextView) findViewById(R.id.time_1);
         time_2 = (TextView) findViewById(R.id.time_2);
@@ -364,6 +372,18 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         }
 
         /**
+         * 设置头像文件
+         */
+        GetHeadFile.getHeadFile(this.getApplicationContext());
+        if (BitmapFactory.decodeFile(getCacheDir() + "/head/") != null)
+        {
+            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/head/"));
+        } else
+        {
+            head.setImageResource(R.drawable.guest);
+        }
+
+        /**
          * 启动自动定位
          */
         location = new LocationHelper(this, this.getApplicationContext());
@@ -439,6 +459,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 break;
             case 3:
                 startActivity(new Intent(MainActivity.this, SettingActivity.class));
+                finish();
                 break;
         }
     }
