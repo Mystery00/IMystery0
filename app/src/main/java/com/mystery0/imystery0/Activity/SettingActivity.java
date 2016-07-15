@@ -180,6 +180,7 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                         SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
                         HeadFile headFile = new HeadFile();
                         headFile.setUsername(sharedPreferences.getString("username", "null"));
+                        headFile.setHeadFileName(sharedPreferences.getString("username", "null") + ".jpg");
                         headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
                         headFile.save(SettingActivity.this, new SaveListenerHelper(SettingActivity.this.getApplicationContext(), progressDialog, SettingActivity.this));
                     }
@@ -235,10 +236,11 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
     private void SetHeadFile()
     {
         GetHeadFile.getHeadFile(this.getApplicationContext());
-        if (BitmapFactory.decodeFile(getCacheDir() + "/head/") != null)
+        SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
+        if (BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + sharedPreferences.getString("username", "null") + ".jpg") != null)
         {
             Log.i("info", "头像更改成功!");
-            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/head/"));
+            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + sharedPreferences.getString("username", "null") + ".jpg"));
         } else
         {
             Log.i("info", "找不到文件!");

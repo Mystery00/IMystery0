@@ -11,6 +11,7 @@ public class HeadFile extends BmobObject
 {
     private String username;
     private String headFilePath;
+    private String headFileName;
 
     public void setUsername(String username)
     {
@@ -30,5 +31,15 @@ public class HeadFile extends BmobObject
     public String getHeadFilePath()
     {
         return headFilePath;
+    }
+
+    public void setHeadFileName(String headFileName)
+    {
+        this.headFileName = headFileName;
+    }
+
+    public String getHeadFileName()
+    {
+        return headFileName;
     }
 }

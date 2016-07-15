@@ -2,6 +2,7 @@ package com.mystery0.imystery0.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -53,7 +54,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     private TextView date;
     private ImageView img_code;
     private ImageView img_refresh;
-    private CircleImageView head;
 
     /**
      * 未来六天天气预报
@@ -292,7 +292,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         title = (TextView) findViewById(R.id.location);
         date = (TextView) findViewById(R.id.date);
         img_refresh = (ImageView) findViewById(R.id.refresh);
-        head = (CircleImageView) findViewById(R.id.img_head_main);
+        CircleImageView head = (CircleImageView) findViewById(R.id.img_head_main);
 
         time_1 = (TextView) findViewById(R.id.time_1);
         time_2 = (TextView) findViewById(R.id.time_2);
@@ -375,11 +375,13 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
          * 设置头像文件
          */
         GetHeadFile.getHeadFile(this.getApplicationContext());
-        if (BitmapFactory.decodeFile(getCacheDir() + "/head/") != null)
+        if (BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg") != null)
         {
-            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/head/"));
+            Log.i("info", "头像更改成功!");
+            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg"));
         } else
         {
+            Log.i("info", "找不到文件!");
             head.setImageResource(R.drawable.guest);
         }
 

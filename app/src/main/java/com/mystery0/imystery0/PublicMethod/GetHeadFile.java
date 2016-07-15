@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.mystery0.imystery0.BaseClass.HeadFile;
 
-import java.io.File;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
@@ -35,7 +34,7 @@ public class GetHeadFile
                 Log.i("info", "成功找到文件路径!");
                 for (HeadFile headFile : list)
                 {
-                    BmobFile bmobFile = new BmobFile(sharedPreferences.getString("username", "null"), "", headFile.getHeadFilePath());
+                    BmobFile bmobFile = new BmobFile(headFile.getHeadFileName(), "", headFile.getHeadFilePath());
                     bmobFile.download(context, new DownloadFileListener()
                     {
                         @Override
