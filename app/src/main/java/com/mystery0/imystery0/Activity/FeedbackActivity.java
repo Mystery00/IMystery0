@@ -62,8 +62,7 @@ public class FeedbackActivity extends Activity implements View.OnClickListener
             @Override
             public void onFailure(int i, String s)
             {
-                GetErrorInfo.getErrorInfo(FeedbackActivity.this, s);
-                Log.e("info", "错误代码:" + i + "错误原因:" + s);
+                GetErrorInfo.getErrorInfo(FeedbackActivity.this, i, s);
             }
         });
     }

@@ -189,8 +189,7 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                     @Override
                     public void onFailure(int i, String s)
                     {
-                        GetErrorInfo.getErrorInfo(SettingActivity.this, s);
-                        Log.e("info", "错误代码:" + i + "错误原因:" + s);
+                        GetErrorInfo.getErrorInfo(SettingActivity.this, i, s);
                     }
 
                     @Override

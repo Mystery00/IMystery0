@@ -135,8 +135,7 @@ public class LoginActivity extends Activity implements View.OnClickListener
             public void onFailure(int i, String s)
             {
                 progressDialog.dismiss();
-                Log.e("info", "错误代码:" + i + "错误原因:" + s);
-                GetErrorInfo.getErrorInfo(LoginActivity.this, s);
+                GetErrorInfo.getErrorInfo(LoginActivity.this, i, s);
             }
         });
     }

@@ -66,8 +66,7 @@ public class RegisterActivity extends Activity
                     public void onFailure(int i, String s)
                     {
                         progressDialog.dismiss();
-                        GetErrorInfo.getErrorInfo(RegisterActivity.this, s);
-                        Log.e("info", "错误代码:" + i + "错误原因:" + s);
+                        GetErrorInfo.getErrorInfo(RegisterActivity.this, i, s);
                     }
                 });
             }

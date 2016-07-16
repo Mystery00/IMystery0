@@ -31,7 +31,6 @@ public class GetHeadFile
             @Override
             public void onSuccess(List<HeadFile> list)
             {
-                Log.i("info", "成功找到文件路径!");
                 for (HeadFile headFile : list)
                 {
                     BmobFile bmobFile = new BmobFile(headFile.getHeadFileName(), "", headFile.getHeadFilePath());
@@ -40,7 +39,6 @@ public class GetHeadFile
                         @Override
                         public void onSuccess(String s)
                         {
-                            Log.i("info", "头像文件下载完成");
                         }
 
                         @Override
