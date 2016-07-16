@@ -45,15 +45,19 @@ import cn.bmob.v3.update.BmobUpdateAgent;
 public class MainActivity extends Activity implements View.OnClickListener, ILocationCallback, AdapterView.OnItemClickListener
 {
     private String District;
+    private String txt;
     private LocationHelper location;
     private FindCityCode findCityCode;
-    private String txt;
+    private GetWeatherInfo getWeatherInfo;
 
     private ListView listView;
     private TextView title;
     private TextView date;
     private ImageView img_code;
     private ImageView img_refresh;
+
+    private static final int REQUEST = 3;
+    private static final int REFRESH = 25;
 
     /**
      * 未来六天天气预报
@@ -81,39 +85,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     private ImageView code_6;
 
     /**
-     * 静态常量
-     */
-    public static final int TXT = 0;
-    public static final int DONE = 1;
-    public static final int LOCATION = 2;
-    private static final int REQUEST = 3;
-    private static final int REFRESH = 25;
-
-    public static final int TMP_0 = 4;
-    public static final int TMP_1 = 5;
-    public static final int TMP_2 = 6;
-    public static final int TMP_3 = 7;
-    public static final int TMP_4 = 8;
-    public static final int TMP_5 = 9;
-    public static final int TMP_6 = 10;
-
-    public static final int DATE_0 = 11;
-    public static final int DATE_1 = 12;
-    public static final int DATE_2 = 13;
-    public static final int DATE_3 = 14;
-    public static final int DATE_4 = 15;
-    public static final int DATE_5 = 16;
-    public static final int DATE_6 = 17;
-
-    public static final int CODE_0 = 18;
-    public static final int CODE_1 = 19;
-    public static final int CODE_2 = 20;
-    public static final int CODE_3 = 21;
-    public static final int CODE_4 = 22;
-    public static final int CODE_5 = 23;
-    public static final int CODE_6 = 24;
-
-    /**
      * Handler消息接收判断
      */
     @SuppressLint("HandlerLeak")
@@ -127,127 +98,128 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             SharedPreferences.Editor editor = sharedPreferences.edit();
             switch (msg.what)
             {
-                case LOCATION:
+                case REFRESH:
+                    Toast.makeText(MainActivity.this, "刷新成功!", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case GetWeatherInfo.LOCATION:
                     title.setText(getTemp.getDistrict());
                     editor.putString("district", District);
                     editor.apply();
                     break;
-                case DONE:
+                case GetWeatherInfo.DONE:
                     editor.putString("district", (String) msg.obj);
                     editor.apply();
                     Toast.makeText(MainActivity.this, "自动定位完成!", Toast.LENGTH_SHORT).show();
                     location.stopLocation();
                     break;
-                case TXT:
+                case GetWeatherInfo.TXT:
                     txt = (String) msg.obj;
                     break;
-                case REFRESH:
-                    Toast.makeText(MainActivity.this, "刷新成功!", Toast.LENGTH_SHORT).show();
-                    break;
 
-                case CODE_0:
+                case GetWeatherInfo.CODE_0:
                     img_code.setImageResource(GetWeatherImage.get(getTemp.getCode_0()));
                     editor.putString("img_code", (String) msg.obj);
                     editor.apply();
                     break;
-                case CODE_1:
+                case GetWeatherInfo.CODE_1:
                     code_1.setImageResource(GetWeatherImage.get(getTemp.getCode_1()));
                     editor.putString("code_1", (String) msg.obj);
                     editor.apply();
                     break;
-                case CODE_2:
+                case GetWeatherInfo.CODE_2:
                     code_2.setImageResource(GetWeatherImage.get(getTemp.getCode_2()));
                     editor.putString("code_2", (String) msg.obj);
                     editor.apply();
                     break;
-                case CODE_3:
+                case GetWeatherInfo.CODE_3:
                     code_3.setImageResource(GetWeatherImage.get(getTemp.getCode_3()));
                     editor.putString("code_3", (String) msg.obj);
                     editor.apply();
                     break;
-                case CODE_4:
+                case GetWeatherInfo.CODE_4:
                     code_4.setImageResource(GetWeatherImage.get(getTemp.getCode_4()));
                     editor.putString("code_4", (String) msg.obj);
                     editor.apply();
                     break;
-                case CODE_5:
+                case GetWeatherInfo.CODE_5:
                     code_5.setImageResource(GetWeatherImage.get(getTemp.getCode_5()));
                     editor.putString("code_5", (String) msg.obj);
                     editor.apply();
                     break;
-                case CODE_6:
+                case GetWeatherInfo.CODE_6:
                     code_6.setImageResource(GetWeatherImage.get(getTemp.getCode_6()));
                     editor.putString("code_6", (String) msg.obj);
                     editor.apply();
                     break;
 
-                case TMP_0:
+                case GetWeatherInfo.TMP_0:
                     tmp_0.setText(getTemp.getTmp_0());
                     editor.putString("tmp_0", msg.obj + "  " + txt);
                     editor.apply();
                     break;
-                case TMP_1:
+                case GetWeatherInfo.TMP_1:
                     tmp_1.setText(getTemp.getTmp_1());
                     editor.putString("tmp_1", (String) msg.obj);
                     editor.apply();
                     break;
-                case TMP_2:
+                case GetWeatherInfo.TMP_2:
                     tmp_2.setText(getTemp.getTmp_2());
                     editor.putString("tmp_2", (String) msg.obj);
                     editor.apply();
                     break;
-                case TMP_3:
+                case GetWeatherInfo.TMP_3:
                     tmp_3.setText(getTemp.getTmp_3());
                     editor.putString("tmp_3", (String) msg.obj);
                     editor.apply();
                     break;
-                case TMP_4:
+                case GetWeatherInfo.TMP_4:
                     tmp_4.setText(getTemp.getTmp_4());
                     editor.putString("tmp_4", (String) msg.obj);
                     editor.apply();
                     break;
-                case TMP_5:
+                case GetWeatherInfo.TMP_5:
                     tmp_5.setText(getTemp.getTmp_5());
                     editor.putString("tmp_5", (String) msg.obj);
                     editor.apply();
                     break;
-                case TMP_6:
+                case GetWeatherInfo.TMP_6:
                     tmp_6.setText(getTemp.getTmp_6());
                     editor.putString("tmp_6", (String) msg.obj);
                     editor.apply();
                     break;
 
-                case DATE_0:
+                case GetWeatherInfo.DATE_0:
                     date.setText(getTemp.getDate_0());
                     editor.putString("date", (String) msg.obj);
                     editor.apply();
                     break;
-                case DATE_1:
+                case GetWeatherInfo.DATE_1:
                     time_1.setText(getTemp.getDate_1());
                     editor.putString("date_1", (String) msg.obj);
                     editor.apply();
                     break;
-                case DATE_2:
+                case GetWeatherInfo.DATE_2:
                     time_2.setText(getTemp.getDate_2());
                     editor.putString("date_2", (String) msg.obj);
                     editor.apply();
                     break;
-                case DATE_3:
+                case GetWeatherInfo.DATE_3:
                     time_3.setText(getTemp.getDate_3());
                     editor.putString("date_3", (String) msg.obj);
                     editor.apply();
                     break;
-                case DATE_4:
+                case GetWeatherInfo.DATE_4:
                     time_4.setText(getTemp.getDate_4());
                     editor.putString("date_4", (String) msg.obj);
                     editor.apply();
                     break;
-                case DATE_5:
+                case GetWeatherInfo.DATE_5:
                     time_5.setText(getTemp.getDate_5());
                     editor.putString("date_5", (String) msg.obj);
                     editor.apply();
                     break;
-                case DATE_6:
+                case GetWeatherInfo.DATE_6:
                     time_6.setText(getTemp.getDate_6());
                     editor.putString("date_6", (String) msg.obj);
                     editor.apply();
@@ -408,9 +380,10 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             District = info;
             title.setText(info);
             String city_code = findCityCode.Find_Code(this.getApplicationContext(), District);
-            GetWeatherInfo.getWeatherCode(city_code);
+            getWeatherInfo = new GetWeatherInfo(handler);
+            getWeatherInfo.getWeatherCode(city_code);
             Message message = new Message();
-            message.what = DONE;
+            message.what = GetWeatherInfo.DONE;
             message.obj = District;
             handler.sendMessage(message);
         }
@@ -438,7 +411,8 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 SharedPreferences sharedPreferences = getSharedPreferences("weather_temp", MODE_PRIVATE);
                 GetTemp getTemp = new GetTemp(sharedPreferences);
                 String city_code = findCityCode.Find_Code(this.getApplicationContext(), getTemp.getDistrict());
-                GetWeatherInfo.getWeatherCode(city_code);
+                getWeatherInfo = new GetWeatherInfo(handler);
+                getWeatherInfo.getWeatherCode(city_code);
                 Message message = new Message();
                 message.what = REFRESH;
                 handler.sendMessage(message);
@@ -478,11 +452,12 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             {
                 District = data.getStringExtra("code");
                 Message message = new Message();
-                message.what = LOCATION;
+                message.what = GetWeatherInfo.LOCATION;
                 message.obj = District;
                 handler.sendMessage(message);
                 String city_code = findCityCode.Find_Code(this.getApplicationContext(), District);
-                GetWeatherInfo.getWeatherCode(city_code);
+                getWeatherInfo = new GetWeatherInfo(handler);
+                getWeatherInfo.getWeatherCode(city_code);
             }
     }
 }

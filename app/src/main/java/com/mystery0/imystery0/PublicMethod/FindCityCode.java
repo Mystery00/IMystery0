@@ -4,6 +4,7 @@ package com.mystery0.imystery0.PublicMethod;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.mystery0.imystery0.DatebaseHelper.ISQLiteOpenHelper;
 

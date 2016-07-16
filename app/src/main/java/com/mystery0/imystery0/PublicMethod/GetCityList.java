@@ -20,9 +20,9 @@ import java.util.List;
  */
 public class GetCityList
 {
-    private String[] provincelist = new String[34];
-    private String[] citylist = new String[512];
-    private String[] districtlist = new String[512];
+    private String[] provinceList = new String[34];
+    private String[] cityList = new String[512];
+    private String[] districtList = new String[512];
 
     public List<Province> getProvince(Context context)
     {
@@ -38,7 +38,7 @@ public class GetCityList
                 Province province = new Province();
                 province.setProvince_name(cursor.getString(cursor.getColumnIndex("Province")));
                 provinces.add(province);
-                provincelist[i] = province.getProvince_name();
+                provinceList[i] = province.getProvince_name();
                 i++;
             }
             cursor.close();
@@ -62,7 +62,7 @@ public class GetCityList
                 City city = new City();
                 city.setCity_name(cursor.getString(cursor.getColumnIndex("City")));
                 cities.add(city);
-                citylist[i] = city.getCity_name();
+                cityList[i] = city.getCity_name();
                 i++;
             }
             cursor.close();
@@ -86,7 +86,7 @@ public class GetCityList
                 District district = new District();
                 district.setDistrict_name(cursor.getString(cursor.getColumnIndex("District")));
                 districts.add(district);
-                districtlist[i] = district.getDistrict_name();
+                districtList[i] = district.getDistrict_name();
                 i++;
             }
             cursor.close();
@@ -101,11 +101,11 @@ public class GetCityList
         switch (get)
         {
             case "Province":
-                return provincelist;
+                return provinceList;
             case "City":
-                return citylist;
+                return cityList;
             case "District":
-                return districtlist;
+                return districtList;
             default:
                 Log.e("error", "获取信息错误!!!!!!!!!!");
                 return null;

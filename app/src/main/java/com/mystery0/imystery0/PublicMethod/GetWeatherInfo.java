@@ -2,6 +2,7 @@ package com.mystery0.imystery0.PublicMethod;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import com.mystery0.imystery0.Activity.MainActivity;
 
@@ -21,14 +22,51 @@ import java.net.URL;
  */
 public class GetWeatherInfo
 {
-    private static Handler handler = new Handler();
+    private Handler handler;
+
+    /**
+     * 静态常量
+     */
+    public static final int TXT = 0;
+    public static final int DONE = 1;
+    public static final int LOCATION = 2;
+
+    public static final int TMP_0 = 4;
+    public static final int TMP_1 = 5;
+    public static final int TMP_2 = 6;
+    public static final int TMP_3 = 7;
+    public static final int TMP_4 = 8;
+    public static final int TMP_5 = 9;
+    public static final int TMP_6 = 10;
+
+    public static final int DATE_0 = 11;
+    public static final int DATE_1 = 12;
+    public static final int DATE_2 = 13;
+    public static final int DATE_3 = 14;
+    public static final int DATE_4 = 15;
+    public static final int DATE_5 = 16;
+    public static final int DATE_6 = 17;
+
+    public static final int CODE_0 = 18;
+    public static final int CODE_1 = 19;
+    public static final int CODE_2 = 20;
+    public static final int CODE_3 = 21;
+    public static final int CODE_4 = 22;
+    public static final int CODE_5 = 23;
+    public static final int CODE_6 = 24;
+
+    public GetWeatherInfo(Handler handler)
+    {
+        Log.i("info", "调用构造函数!");
+        this.handler = handler;
+    }
 
     /**
      * 获取天气api返回全部代码
      * 解析返回的数据
      */
 
-    public static void getWeatherCode(final String code)//获取全部数据
+    public void getWeatherCode(final String code)//获取全部数据
     {
         new Thread(new Runnable()
         {
@@ -81,7 +119,7 @@ public class GetWeatherInfo
         }).start();
     }
 
-    private static void getNow(String text)//获取now 实况天气
+    private void getNow(String text)//获取now 实况天气
     {
         try
         {
@@ -98,7 +136,7 @@ public class GetWeatherInfo
         }
     }
 
-    private static void getDailyForecast(String text)//获取daily_forecast 天气预报
+    private void getDailyForecast(String text)//获取daily_forecast 天气预报
     {
         try
         {
@@ -120,7 +158,7 @@ public class GetWeatherInfo
         }
     }
 
-    private static void getDay_0(String text)//获取今日信息
+    private void getDay_0(String text)//获取今日信息
     {
         String date = null;
         try
@@ -133,12 +171,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message1 = new Message();
-        message1.what = MainActivity.DATE_0;
+        message1.what = DATE_0;
         message1.obj = date;
         handler.sendMessage(message1);
     }
 
-    private static void getDay_1(String text)
+    private void getDay_1(String text)
     {
         String date = null;
         String tmp = null;
@@ -156,15 +194,15 @@ public class GetWeatherInfo
         }
         Message message1 = new Message();
         Message message2 = new Message();
-        message1.what = MainActivity.DATE_1;
+        message1.what = DATE_1;
         message1.obj = date;
-        message2.what = MainActivity.TMP_1;
+        message2.what = TMP_1;
         message2.obj = tmp;
         handler.sendMessage(message1);
         handler.sendMessage(message2);
     }
 
-    private static void getDay_2(String text)
+    private void getDay_2(String text)
     {
         String date = null;
         String tmp = null;
@@ -182,15 +220,15 @@ public class GetWeatherInfo
         }
         Message message1 = new Message();
         Message message2 = new Message();
-        message1.what = MainActivity.DATE_2;
+        message1.what = DATE_2;
         message1.obj = date;
-        message2.what = MainActivity.TMP_2;
+        message2.what = TMP_2;
         message2.obj = tmp;
         handler.sendMessage(message1);
         handler.sendMessage(message2);
     }
 
-    private static void getDay_3(String text)
+    private void getDay_3(String text)
     {
         String date = null;
         String tmp = null;
@@ -208,15 +246,15 @@ public class GetWeatherInfo
         }
         Message message1 = new Message();
         Message message2 = new Message();
-        message1.what = MainActivity.DATE_3;
+        message1.what = DATE_3;
         message1.obj = date;
-        message2.what = MainActivity.TMP_3;
+        message2.what = TMP_3;
         message2.obj = tmp;
         handler.sendMessage(message1);
         handler.sendMessage(message2);
     }
 
-    private static void getDay_4(String text)
+    private void getDay_4(String text)
     {
         String date = null;
         String tmp = null;
@@ -234,15 +272,15 @@ public class GetWeatherInfo
         }
         Message message1 = new Message();
         Message message2 = new Message();
-        message1.what = MainActivity.DATE_4;
+        message1.what = DATE_4;
         message1.obj = date;
-        message2.what = MainActivity.TMP_4;
+        message2.what = TMP_4;
         message2.obj = tmp;
         handler.sendMessage(message1);
         handler.sendMessage(message2);
     }
 
-    private static void getDay_5(String text)
+    private void getDay_5(String text)
     {
         String date = null;
         String tmp = null;
@@ -260,15 +298,15 @@ public class GetWeatherInfo
         }
         Message message1 = new Message();
         Message message2 = new Message();
-        message1.what = MainActivity.DATE_5;
+        message1.what = DATE_5;
         message1.obj = date;
-        message2.what = MainActivity.TMP_5;
+        message2.what = TMP_5;
         message2.obj = tmp;
         handler.sendMessage(message1);
         handler.sendMessage(message2);
     }
 
-    private static void getDay_6(String text)
+    private void getDay_6(String text)
     {
         String date = null;
         String tmp = null;
@@ -286,15 +324,15 @@ public class GetWeatherInfo
         }
         Message message1 = new Message();
         Message message2 = new Message();
-        message1.what = MainActivity.DATE_6;
+        message1.what = DATE_6;
         message1.obj = date;
-        message2.what = MainActivity.TMP_6;
+        message2.what = TMP_6;
         message2.obj = tmp;
         handler.sendMessage(message1);
         handler.sendMessage(message2);
     }
 
-    private static void getCond(String text)//获取cond 天气状况
+    private void getCond(String text)//获取cond 天气状况
     {
         try
         {
@@ -307,7 +345,7 @@ public class GetWeatherInfo
         }
     }
 
-    private static void getTxt(String text)//获取txt 天气描述
+    private void getTxt(String text)//获取txt 天气描述
     {
         String weather_txt = null;
         try
@@ -319,12 +357,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.TXT;
+        message.what = TXT;
         message.obj = weather_txt;
         handler.sendMessage(message);
     }
 
-    private static void getTmp(String text)//获取tmp 当前温度(摄氏度)
+    private void getTmp(String text)//获取tmp 当前温度(摄氏度)
     {
         String nowTmp = null;
         try
@@ -336,12 +374,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.TMP_0;
+        message.what = TMP_0;
         message.obj = nowTmp;
         handler.sendMessage(message);
     }
 
-    private static void getCode(String text)//获取code 天气代码
+    private void getCode(String text)//获取code 天气代码
     {
         String img_code = null;
         try
@@ -353,15 +391,15 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.CODE_0;
+        message.what = CODE_0;
         message.obj = img_code;
         handler.sendMessage(message);
         Message message1 = new Message();
-        message1.what = MainActivity.LOCATION;
+        message1.what = LOCATION;
         handler.sendMessage(message1);
     }
 
-    private static void getCode_1(String text)
+    private void getCode_1(String text)
     {
 
         String img_code = null;
@@ -374,12 +412,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.CODE_1;
+        message.what = CODE_1;
         message.obj = img_code;
         handler.sendMessage(message);
     }
 
-    private static void getCode_2(String text)
+    private void getCode_2(String text)
     {
 
         String img_code = null;
@@ -392,12 +430,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.CODE_2;
+        message.what = CODE_2;
         message.obj = img_code;
         handler.sendMessage(message);
     }
 
-    private static void getCode_3(String text)
+    private void getCode_3(String text)
     {
 
         String img_code = null;
@@ -410,12 +448,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.CODE_3;
+        message.what = CODE_3;
         message.obj = img_code;
         handler.sendMessage(message);
     }
 
-    private static void getCode_4(String text)
+    private void getCode_4(String text)
     {
 
         String img_code = null;
@@ -428,12 +466,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.CODE_4;
+        message.what = CODE_4;
         message.obj = img_code;
         handler.sendMessage(message);
     }
 
-    private static void getCode_5(String text)
+    private void getCode_5(String text)
     {
 
         String img_code = null;
@@ -446,12 +484,12 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.CODE_5;
+        message.what = CODE_5;
         message.obj = img_code;
         handler.sendMessage(message);
     }
 
-    private static void getCode_6(String text)
+    private void getCode_6(String text)
     {
 
         String img_code = null;
@@ -464,7 +502,7 @@ public class GetWeatherInfo
             e.printStackTrace();
         }
         Message message = new Message();
-        message.what = MainActivity.CODE_6;
+        message.what = CODE_6;
         message.obj = img_code;
         handler.sendMessage(message);
     }

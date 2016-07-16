@@ -27,7 +27,6 @@ import java.util.List;
  */
 public class ViewpagerActivity extends Activity
 {
-    private ImageButton intent;
     private ViewPager viewPager;
     private List<View> viewList;
     private LinearLayout mLinearLayout;
@@ -57,7 +56,7 @@ public class ViewpagerActivity extends Activity
 
         Set_Res();
 
-        intent = (ImageButton) view.findViewById(R.id.viewpager_last_intent);
+        ImageButton intent = (ImageButton) view.findViewById(R.id.viewpager_last_intent);
         intent.setOnClickListener(new View.OnClickListener()
         {
             @Override
