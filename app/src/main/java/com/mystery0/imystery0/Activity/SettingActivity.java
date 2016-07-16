@@ -25,12 +25,15 @@ import com.mystery0.imystery0.PublicMethod.GetErrorInfo;
 import com.mystery0.imystery0.PublicMethod.GetHeadFile;
 import com.mystery0.imystery0.PublicMethod.GetPath;
 import com.mystery0.imystery0.BaseClass.HeadFile;
+import com.mystery0.imystery0.PublicMethod.QueryHeadFile;
 import com.mystery0.imystery0.R;
 
 import java.io.File;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.listener.DeleteListener;
+import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
 /**
@@ -179,11 +182,50 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                     public void onSuccess()
                     {
                         SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
-                        HeadFile headFile = new HeadFile();
-                        headFile.setUsername(sharedPreferences.getString("username", "null"));
-                        headFile.setHeadFileName(sharedPreferences.getString("username", "null") + ".jpg");
-                        headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
-                        headFile.save(SettingActivity.this, new SaveListenerHelper(SettingActivity.this.getApplicationContext(), progressDialog, SettingActivity.this));
+                        String ID = QueryHeadFile.queryId(SettingActivity.this, sharedPreferences.getString("username", "null"));
+                        if (ID != null)
+                        {
+                            BmobFile file = new BmobFile();
+                            file.setUrl(QueryHeadFile.queryPath(SettingActivity.this, sharedPreferences.getString("username", "null")));
+                            file.delete(SettingActivity.this, new DeleteListener()
+                            {
+                                @Override
+                                public void onSuccess()
+                                {
+                                }
+
+                                @Override
+                                public void onFailure(int i, String s)
+                                {
+                                    GetErrorInfo.getErrorInfo(SettingActivity.this, i, s);
+                                }
+                            });
+
+                            HeadFile headFile = new HeadFile();
+                            headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
+                            headFile.update(SettingActivity.this, ID, new UpdateListener()
+                            {
+                                @Override
+                                public void onSuccess()
+                                {
+                                    Log.i("info", "数据更新成功!");
+                                }
+
+                                @Override
+                                public void onFailure(int i, String s)
+                                {
+                                    GetErrorInfo.getErrorInfo(SettingActivity.this, i, s);
+                                }
+                            });
+                        } else
+                        {
+                            Log.i("info", "新建数据!");
+                            HeadFile headFile = new HeadFile();
+                            headFile.setUsername(sharedPreferences.getString("username", "null"));
+                            headFile.setHeadFileName(sharedPreferences.getString("username", "null") + ".jpg");
+                            headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
+                            headFile.save(SettingActivity.this, new SaveListenerHelper(SettingActivity.this.getApplicationContext(), progressDialog, SettingActivity.this));
+                        }
                     }
 
                     @Override
