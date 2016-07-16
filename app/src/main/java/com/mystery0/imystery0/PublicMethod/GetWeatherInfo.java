@@ -57,7 +57,6 @@ public class GetWeatherInfo
 
     public GetWeatherInfo(Handler handler)
     {
-        Log.i("info", "调用构造函数!");
         this.handler = handler;
     }
 

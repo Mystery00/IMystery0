@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,9 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     private TextView date;
     private ImageView img_code;
     private ImageView img_refresh;
+    private RelativeLayout menuLayout;
+
+    private CircleImageView img_head_main;
 
     private static final int REQUEST = 3;
     private static final int REFRESH = 25;
@@ -241,6 +245,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         title.setOnClickListener(this);
         listView.setOnItemClickListener(this);
         img_refresh.setOnClickListener(this);
+        img_head_main.setOnClickListener(this);
     }
 
     /**
@@ -264,7 +269,9 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         title = (TextView) findViewById(R.id.location);
         date = (TextView) findViewById(R.id.date);
         img_refresh = (ImageView) findViewById(R.id.refresh);
-        CircleImageView head = (CircleImageView) findViewById(R.id.img_head_main);
+        img_head_main = (CircleImageView) findViewById(R.id.img_head_main);
+        menuLayout = (RelativeLayout) findViewById(R.id.menu_layout);
+        CircleImageView img_head_menu = (CircleImageView) findViewById(R.id.img_head_menu);
 
         time_1 = (TextView) findViewById(R.id.time_1);
         time_2 = (TextView) findViewById(R.id.time_2);
@@ -350,11 +357,13 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         if (BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg") != null)
         {
             Log.i("info", "头像更改成功!");
-            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg"));
+            img_head_menu.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg"));
+            img_head_main.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg"));
         } else
         {
             Log.i("info", "找不到文件!");
-            head.setImageResource(R.drawable.guest);
+            img_head_menu.setImageResource(R.drawable.guest);
+            img_head_main.setImageResource(R.drawable.guest);
         }
 
         /**
@@ -386,6 +395,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             message.what = GetWeatherInfo.DONE;
             message.obj = District;
             handler.sendMessage(message);
+            location.stopLocation();
         }
     }
 
@@ -393,6 +403,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     public void onLocationError(String info)
     {
         Toast.makeText(this, info, Toast.LENGTH_SHORT).show();
+        location.stopLocation();
     }
 
     /**
@@ -416,6 +427,10 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 Message message = new Message();
                 message.what = REFRESH;
                 handler.sendMessage(message);
+                break;
+            case R.id.img_head_main:
+                menuLayout.showContextMenu();
+                break;
         }
     }
 

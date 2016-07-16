@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.mystery0.imystery0.BaseClass.FeedBack;
+import com.mystery0.imystery0.PublicMethod.GetErrorInfo;
 import com.mystery0.imystery0.R;
 
 import cn.bmob.push.BmobPush;
@@ -61,9 +62,8 @@ public class FeedbackActivity extends Activity implements View.OnClickListener
             @Override
             public void onFailure(int i, String s)
             {
-                Log.e("bmob", "保存反馈信息失败："+s);
-                Log.e("bmob","错误代码:"+i);
-                Toast.makeText(FeedbackActivity.this, "错误,错误代码:" + i, Toast.LENGTH_SHORT).show();
+                GetErrorInfo.getErrorInfo(FeedbackActivity.this, s);
+                Log.e("info", "错误代码:" + i + "错误原因:" + s);
             }
         });
     }

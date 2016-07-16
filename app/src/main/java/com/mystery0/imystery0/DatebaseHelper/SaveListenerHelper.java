@@ -38,8 +38,7 @@ public class SaveListenerHelper extends SaveListener
     public void onFailure(int i, String s)
     {
         progressDialog.dismiss();
-        Log.e("error", "错误代码:" + i);
-        Log.e("error", "错误信息:" + s);
+        Log.e("info", "错误代码:" + i + "错误原因:" + s);
         saveCallback.GetSaveState(false);
     }
 }

@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.mystery0.imystery0.PublicMethod.GetErrorInfo;
 import com.mystery0.imystery0.R;
 
 import cn.bmob.v3.Bmob;
@@ -65,8 +66,8 @@ public class RegisterActivity extends Activity
                     public void onFailure(int i, String s)
                     {
                         progressDialog.dismiss();
-                        Toast.makeText(RegisterActivity.this, "注册失败,请检查网络连接", Toast.LENGTH_SHORT).show();
-                        Log.i("info","错误原因:"+s);
+                        GetErrorInfo.getErrorInfo(RegisterActivity.this, s);
+                        Log.e("info", "错误代码:" + i + "错误原因:" + s);
                     }
                 });
             }

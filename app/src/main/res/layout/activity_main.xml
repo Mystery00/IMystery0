@@ -109,7 +109,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout_2"
                     android:layout_width="120dp"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:background="@drawable/bg_weather"
@@ -120,6 +120,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textSize="20sp"
                         android:layout_weight="1"
                         android:gravity="center"/>
 
@@ -135,6 +136,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textSize="20sp"
                         android:layout_weight="1"
                         android:gravity="center"/>
                 </LinearLayout>
@@ -142,7 +144,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout_5"
                     android:layout_width="120dp"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_below="@+id/linearLayout_2"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="20dp"
@@ -152,6 +154,7 @@
                     <TextView
                         android:id="@+id/time_5"
                         android:layout_width="wrap_content"
+                        android:textSize="20sp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
@@ -169,6 +172,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textSize="20sp"
                         android:layout_weight="1"
                         android:gravity="center"/>
                 </LinearLayout>
@@ -176,7 +180,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout_1"
                     android:layout_width="120dp"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
@@ -189,6 +193,7 @@
                         android:id="@+id/time_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"/>
@@ -205,6 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textSize="20sp"
                         android:layout_weight="1"
                         android:gravity="center"/>
                 </LinearLayout>
@@ -212,7 +218,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout_3"
                     android:layout_width="120dp"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_alignParentTop="true"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
@@ -226,6 +232,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textSize="20sp"
                         android:layout_weight="1"
                         android:gravity="center"/>
 
@@ -240,6 +247,7 @@
                         android:id="@+id/tmp_3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"/>
@@ -248,7 +256,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout_4"
                     android:layout_width="120dp"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_below="@+id/linearLayout_1"
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
@@ -262,6 +270,7 @@
                         android:id="@+id/time_4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"/>
@@ -276,6 +285,7 @@
                     <TextView
                         android:id="@+id/tmp_4"
                         android:layout_width="match_parent"
+                        android:textSize="20sp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
@@ -285,7 +295,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout_6"
                     android:layout_width="120dp"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     android:layout_below="@+id/linearLayout_2"
                     android:layout_marginLeft="20dp"
                     android:layout_marginStart="20dp"
@@ -299,6 +309,7 @@
                         android:id="@+id/time_6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"/>
@@ -314,6 +325,7 @@
                         android:id="@+id/tmp_6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textSize="20sp"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"/>
@@ -323,10 +335,11 @@
     </ScrollView>
 
     <RelativeLayout
-        android:layout_width="260dp"
+        android:layout_width="230dp"
         android:layout_margin="10dp"
         android:background="@color/listBackground"
         android:layout_height="match_parent"
+        android:id="@+id/menu_layout"
         android:layout_gravity="start">
 
         <ImageView
@@ -339,12 +352,12 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:id="@+id/img_head_main"
+            android:id="@+id/img_head_menu"
             android:contentDescription="@string/des_head_img"/>
 
         <ListView
             android:id="@+id/list_left_drawer"
-            android:layout_below="@+id/img_head_main"
+            android:layout_below="@+id/img_head_menu"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

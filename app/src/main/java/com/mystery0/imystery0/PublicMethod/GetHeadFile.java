@@ -46,8 +46,7 @@ public class GetHeadFile
                         @Override
                         public void onFailure(int i, String s)
                         {
-                            Log.e("error", "错误代码:" + i);
-                            Log.e("error", "错误信息:" + s);
+                            Log.e("info", "错误代码:" + i + "错误原因:" + s);
                         }
                     });
                 }
@@ -56,8 +55,7 @@ public class GetHeadFile
             @Override
             public void onError(int i, String s)
             {
-                Log.e("error", "错误代码:" + i);
-                Log.e("error", "错误信息:" + s);
+                Log.e("info", "错误代码:" + i + "错误原因:" + s);
             }
         });
     }

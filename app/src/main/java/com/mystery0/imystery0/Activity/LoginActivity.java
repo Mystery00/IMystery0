@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mystery0.imystery0.PublicMethod.GetErrorInfo;
 import com.mystery0.imystery0.R;
 
 import cn.bmob.v3.Bmob;
@@ -31,8 +33,6 @@ public class LoginActivity extends Activity implements View.OnClickListener
     private ImageButton login;
     private TextView register;
     private TextView forgot;
-    private String username;
-    private String password;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)
@@ -115,8 +115,8 @@ public class LoginActivity extends Activity implements View.OnClickListener
         progressDialog.setMessage("Loading...");
         progressDialog.setCancelable(true);
         progressDialog.show();
-        username = user_name.getText().toString();
-        password = pass_word.getText().toString();
+        String username = user_name.getText().toString();
+        String password = pass_word.getText().toString();
         final BmobUser user = new BmobUser();
         user.setUsername(username);
         user.setPassword(password);
@@ -135,7 +135,8 @@ public class LoginActivity extends Activity implements View.OnClickListener
             public void onFailure(int i, String s)
             {
                 progressDialog.dismiss();
-                Toast.makeText(LoginActivity.this, "账号或密码错误,请重新登陆!", Toast.LENGTH_SHORT).show();
+                Log.e("info", "错误代码:" + i + "错误原因:" + s);
+                GetErrorInfo.getErrorInfo(LoginActivity.this, s);
             }
         });
     }

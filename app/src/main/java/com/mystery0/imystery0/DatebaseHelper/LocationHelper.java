@@ -27,7 +27,6 @@ public class LocationHelper implements AMapLocationListener
 
         locationClientOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
         locationClientOption.setNeedAddress(true);
-        //locationClientOption.setInterval(10000);
         locationClient.setLocationOption(locationClientOption);
     }
 
@@ -54,6 +53,7 @@ public class LocationHelper implements AMapLocationListener
             {
                 Log.e("error", "" + aMapLocation.getErrorCode());
                 Log.e("error", aMapLocation.getErrorInfo());
+                stopLocation();
                 callback.onLocationError(aMapLocation.getErrorInfo());
             }
         }

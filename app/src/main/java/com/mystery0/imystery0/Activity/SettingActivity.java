@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.mystery0.imystery0.BaseClass.CircleImageView;
 import com.mystery0.imystery0.DatebaseHelper.SaveListenerHelper;
 import com.mystery0.imystery0.ISaveCallback;
+import com.mystery0.imystery0.PublicMethod.GetErrorInfo;
 import com.mystery0.imystery0.PublicMethod.GetHeadFile;
 import com.mystery0.imystery0.PublicMethod.GetPath;
 import com.mystery0.imystery0.BaseClass.HeadFile;
@@ -188,9 +189,8 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                     @Override
                     public void onFailure(int i, String s)
                     {
-                        Log.e("error", "错误代码:" + i);
-                        Log.e("error", "错误信息:" + s);
-                        Toast.makeText(SettingActivity.this, s, Toast.LENGTH_SHORT).show();
+                        GetErrorInfo.getErrorInfo(SettingActivity.this, s);
+                        Log.e("info", "错误代码:" + i + "错误原因:" + s);
                     }
 
                     @Override
