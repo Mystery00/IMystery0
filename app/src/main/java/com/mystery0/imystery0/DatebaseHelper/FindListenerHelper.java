@@ -15,7 +15,7 @@ import cn.bmob.v3.listener.FindListener;
  * Created by myste on 2016-7-16-0016.
  * 查询重写
  */
-public abstract class FindListenerHelper<T> extends FindListener
+public class FindListenerHelper extends FindListener<HeadFile>
 {
     private Context context;
     private IFindCallback callback;
@@ -27,9 +27,17 @@ public abstract class FindListenerHelper<T> extends FindListener
     }
 
     @Override
-    public void onSuccess(List list)
+    public void onSuccess(List<HeadFile> list)
     {
-
+        if (list.size() == 0)
+        {
+            callback.GetId(null);
+        } else
+        {
+            HeadFile headFile = list.get(0);
+            callback.GetId(headFile.getObjectId());
+            callback.GetPath(headFile.getHeadFilePath());
+        }
     }
 
     @Override

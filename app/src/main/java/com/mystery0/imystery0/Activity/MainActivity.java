@@ -342,18 +342,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 background.setImageBitmap(bm);
             }
         }
-
-        /**
-         * 设置头像文件
-         */
-        GetHeadFile.getHeadFile(this.getApplicationContext());
-        if (BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg") != null)
-        {
-            img_head_menu.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + getSharedPreferences("userinfo", Context.MODE_PRIVATE).getString("username", "null") + ".jpg"));
-        } else
-        {
-            img_head_menu.setImageResource(R.drawable.guest);
-        }
+        GetHeadFile.getHeadFile(this.getApplicationContext(), img_head_menu);
 
         /**
          * 启动自动定位

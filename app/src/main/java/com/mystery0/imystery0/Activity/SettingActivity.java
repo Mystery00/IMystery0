@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,28 +18,28 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.mystery0.imystery0.BaseClass.CircleImageView;
+import com.mystery0.imystery0.DatebaseHelper.FindListenerHelper;
 import com.mystery0.imystery0.DatebaseHelper.SaveListenerHelper;
+import com.mystery0.imystery0.IFindCallback;
 import com.mystery0.imystery0.ISaveCallback;
 import com.mystery0.imystery0.PublicMethod.GetErrorInfo;
 import com.mystery0.imystery0.PublicMethod.GetHeadFile;
 import com.mystery0.imystery0.PublicMethod.GetPath;
 import com.mystery0.imystery0.BaseClass.HeadFile;
-import com.mystery0.imystery0.PublicMethod.QueryHeadFile;
 import com.mystery0.imystery0.R;
 
 import java.io.File;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.listener.DeleteListener;
-import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
 /**
  * Created by myste on 2016-7-7-0007.
  * 设置界面
  */
-public class SettingActivity extends Activity implements Switch.OnCheckedChangeListener, View.OnClickListener, ISaveCallback
+public class SettingActivity extends Activity implements Switch.OnCheckedChangeListener, View.OnClickListener, ISaveCallback, IFindCallback
 {
     private RelativeLayout personalLayout;
     private RelativeLayout themeLayout;
@@ -50,6 +49,7 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
     private ImageView back;
     private CircleImageView head;
     private ProgressDialog progressDialog;
+    private BmobFile bmobFile;
 
     final static public int FILE_SELECT_CODE = 0;
     final static private int SAVE_DONE = 1;
@@ -91,7 +91,7 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
             autoLogin.setChecked(false);
         }
 
-        SetHeadFile();
+        GetHeadFile.getHeadFile(this.getApplicationContext(), head);
     }
 
     @Override
@@ -172,7 +172,6 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
             progressDialog.setMessage("已上传0%");
             progressDialog.show();
             String path = GetPath.getPath(this, data.getData());
-            final BmobFile bmobFile;
             if (path != null)
             {
                 bmobFile = new BmobFile(new File(path));
@@ -182,55 +181,15 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
                     public void onSuccess()
                     {
                         SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
-                        String ID = QueryHeadFile.queryId(SettingActivity.this, sharedPreferences.getString("username", "null"));
-                        if (ID != null)
-                        {
-                            BmobFile file = new BmobFile();
-                            file.setUrl(QueryHeadFile.queryPath(SettingActivity.this, sharedPreferences.getString("username", "null")));
-                            file.delete(SettingActivity.this, new DeleteListener()
-                            {
-                                @Override
-                                public void onSuccess()
-                                {
-                                }
-
-                                @Override
-                                public void onFailure(int i, String s)
-                                {
-                                    GetErrorInfo.getErrorInfo(SettingActivity.this, i, s);
-                                }
-                            });
-
-                            HeadFile headFile = new HeadFile();
-                            headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
-                            headFile.update(SettingActivity.this, ID, new UpdateListener()
-                            {
-                                @Override
-                                public void onSuccess()
-                                {
-                                    Log.i("info", "数据更新成功!");
-                                }
-
-                                @Override
-                                public void onFailure(int i, String s)
-                                {
-                                    GetErrorInfo.getErrorInfo(SettingActivity.this, i, s);
-                                }
-                            });
-                        } else
-                        {
-                            Log.i("info", "新建数据!");
-                            HeadFile headFile = new HeadFile();
-                            headFile.setUsername(sharedPreferences.getString("username", "null"));
-                            headFile.setHeadFileName(sharedPreferences.getString("username", "null") + ".jpg");
-                            headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
-                            headFile.save(SettingActivity.this, new SaveListenerHelper(SettingActivity.this.getApplicationContext(), progressDialog, SettingActivity.this));
-                        }
+                        BmobQuery<HeadFile> query = new BmobQuery<>();
+                        query.addWhereEqualTo("username", sharedPreferences.getString("username", "null"));
+                        query.findObjects(SettingActivity.this, new FindListenerHelper(SettingActivity.this, SettingActivity.this));
                     }
 
                     @Override
                     public void onFailure(int i, String s)
                     {
+                        progressDialog.dismiss();
                         GetErrorInfo.getErrorInfo(SettingActivity.this, i, s);
                     }
 
@@ -265,27 +224,36 @@ public class SettingActivity extends Activity implements Switch.OnCheckedChangeL
             switch (msg.what)
             {
                 case SAVE_DONE:
-                    SetHeadFile();
+                    GetHeadFile.getHeadFile(SettingActivity.this, head);
+                    Log.i("info", "头像修改成功!");
                     break;
             }
         }
     };
 
-    /**
-     * 设置头像文件
-     */
-    private void SetHeadFile()
+    @Override
+    public void GetId(String id)
     {
-        GetHeadFile.getHeadFile(this.getApplicationContext());
-        SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
-        if (BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + sharedPreferences.getString("username", "null") + ".jpg") != null)
+        if (id != null)
         {
-            Log.i("info", "头像更改成功!");
-            head.setImageBitmap(BitmapFactory.decodeFile(getCacheDir() + "/bmob/" + sharedPreferences.getString("username", "null") + ".jpg"));
-        } else
-        {
-            Log.i("info", "找不到文件!");
-            head.setImageResource(R.drawable.guest);
+            HeadFile headFile = new HeadFile();
+            headFile.setObjectId(id);
+            headFile.delete(SettingActivity.this);
         }
+        SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
+        HeadFile headFile = new HeadFile();
+        headFile.setUsername(sharedPreferences.getString("username", "null"));
+        headFile.setHeadFileName(sharedPreferences.getString("username", "null") + ".jpg");
+        headFile.setHeadFilePath(bmobFile.getFileUrl(SettingActivity.this));
+        headFile.save(SettingActivity.this, new SaveListenerHelper(SettingActivity.this.getApplicationContext(), progressDialog, SettingActivity.this));
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void GetPath(String path)
+    {
+        BmobFile file = new BmobFile();
+        file.setUrl(path);
+        file.delete(SettingActivity.this);
     }
 }

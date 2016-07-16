@@ -7,4 +7,6 @@ package com.mystery0.imystery0;
 public interface IFindCallback
 {
     void GetId(String id);
+
+    void GetPath(String path);
 }
