@@ -1,10 +1,9 @@
 package com.mystery0.imystery0.DatebaseHelper;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.mystery0.imystery0.BaseClass.HeadFile;
-import com.mystery0.imystery0.IFindCallback;
+import com.mystery0.imystery0.Callback.IFindCallback;
 import com.mystery0.imystery0.PublicMethod.GetErrorInfo;
 
 import java.util.List;

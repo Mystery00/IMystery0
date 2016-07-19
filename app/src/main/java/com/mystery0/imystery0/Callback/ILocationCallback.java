@@ -1,4 +1,4 @@
-package com.mystery0.imystery0;
+package com.mystery0.imystery0.Callback;
 
 /**
  * Created by myste on 2016-6-25-0025.

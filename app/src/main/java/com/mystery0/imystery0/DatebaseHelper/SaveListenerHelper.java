@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.mystery0.imystery0.ISaveCallback;
+import com.mystery0.imystery0.Callback.ISaveCallback;
 
 import cn.bmob.v3.listener.SaveListener;
 

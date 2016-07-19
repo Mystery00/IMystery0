@@ -7,7 +7,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.mystery0.imystery0.ILocationCallback;
+import com.mystery0.imystery0.Callback.ILocationCallback;
 
 /**
  * Created by myste on 2016-6-21-0021.

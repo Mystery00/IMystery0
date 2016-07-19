@@ -2,7 +2,6 @@ package com.mystery0.imystery0.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -10,7 +9,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -21,7 +19,7 @@ import android.widget.Toast;
 
 import com.mystery0.imystery0.BaseClass.CircleImageView;
 import com.mystery0.imystery0.DatebaseHelper.LocationHelper;
-import com.mystery0.imystery0.ILocationCallback;
+import com.mystery0.imystery0.Callback.ILocationCallback;
 import com.mystery0.imystery0.PublicMethod.GetHeadFile;
 import com.mystery0.imystery0.PublicMethod.GetWeatherImage;
 import com.mystery0.imystery0.PublicMethod.GetMenuList;
