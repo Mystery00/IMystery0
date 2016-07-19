@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class Music_Service extends Service
 {
-    static private MediaPlayer mp;
+    static private MediaPlayer mp = new MediaPlayer();
 
     @Override
     public void onCreate()
@@ -25,6 +25,20 @@ public class Music_Service extends Service
     @Override
     public int onStartCommand(Intent intent, int flags, int startId)
     {
+        String path = intent.getStringExtra("music");
+        Log.i("info", path);
+        try
+        {
+            mp.setDataSource(path);
+            Log.i("info", "准备资源");
+            mp.prepare();
+            mp.start();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+            mp.reset();
+            Log.i("error", "错误!!!!!!!");
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -32,27 +46,6 @@ public class Music_Service extends Service
     public IBinder onBind(Intent intent)
     {
         return null;
-    }
-
-    public static void Prepare(String path)
-    {
-        mp = new MediaPlayer();
-        try
-        {
-            if (mp.isPlaying())
-            {
-                mp.stop();
-                mp.release();
-            }
-            mp.reset();
-            mp.setDataSource(path);
-            mp.prepare();
-            mp.start();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-            Log.i("error", "错误!!!!!!!");
-        }
     }
 
     @Override

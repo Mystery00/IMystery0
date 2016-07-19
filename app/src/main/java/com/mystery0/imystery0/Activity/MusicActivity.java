@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -17,6 +19,7 @@ import android.widget.ListView;
 import com.mystery0.imystery0.BaseClass.Music;
 import com.mystery0.imystery0.Adapter.MusicAdapter;
 import com.mystery0.imystery0.ContentProvider.MusicListProvider;
+import com.mystery0.imystery0.PublicMethod.GetMusicServiceState;
 import com.mystery0.imystery0.R;
 import com.mystery0.imystery0.Service.Music_Service;
 
@@ -146,10 +149,12 @@ public class MusicActivity extends Activity implements View.OnClickListener
 
     void prepare_music(int position)
     {
-        if (!cc)
+        if (GetMusicServiceState.isServiceRunning(MusicActivity.this, "com.mystery0.imystery0.Service.Music_Service"))
+        {
+            Log.i("info", "服务运行,停止!");
             stopService(intent);
-        String path = musicList[position];
-        Music_Service.Prepare(path);
+        }
+        intent.putExtra("music", musicList[position]);
         startService(intent);
     }
 }
