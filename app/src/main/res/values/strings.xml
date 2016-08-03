@@ -24,6 +24,7 @@
     <string name="des_head_img">个人资料头像</string>
     <string name="des_weixin_img">微信公众号</string>
     <string name="des_background_img">背景图片</string>
+    <string name="des_arrow_img">下拉刷新箭头</string>
 
     <!--字符串引用-->
     <string name="app_name">iMystery0</string>

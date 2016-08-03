@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -40,19 +41,21 @@ import cn.bmob.v3.update.BmobUpdateAgent;
  * Created by myste on 2016-6-2-0002.
  * 主视图
  */
-public class MainActivity extends Activity implements View.OnClickListener, ILocationCallback, AdapterView.OnItemClickListener
+public class MainActivity extends Activity implements View.OnClickListener, ILocationCallback, AdapterView.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener
 {
     private String District;
     private String txt;
     private LocationHelper location;
     private FindCityCode findCityCode;
     private GetWeatherInfo getWeatherInfo;
+    private boolean isRefresh = false;//是否刷新中
 
     private ListView listView;
     private TextView title;
     private TextView date;
     private ImageView img_code;
     private ImageView img_refresh;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private static final int REQUEST = 3;
     private static final int REFRESH = 25;
@@ -97,6 +100,8 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             switch (msg.what)
             {
                 case REFRESH:
+                    swipeRefreshLayout.setRefreshing(false);
+                    isRefresh = false;
                     Toast.makeText(MainActivity.this, "刷新成功!", Toast.LENGTH_SHORT).show();
                     break;
 
@@ -239,6 +244,14 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         title.setOnClickListener(this);
         listView.setOnItemClickListener(this);
         img_refresh.setOnClickListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        //加载颜色是循环播放的，只要没有完成刷新就会一直循环，color1>color2>color3>color4
+        swipeRefreshLayout.setColorScheme(
+                getResources().getColor(android.R.color.white),
+                getResources().getColor(android.R.color.holo_green_light),
+                getResources().getColor(android.R.color.holo_orange_light),
+                getResources().getColor(android.R.color.holo_red_light)
+        );
     }
 
     /**
@@ -262,6 +275,7 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         title = (TextView) findViewById(R.id.location);
         date = (TextView) findViewById(R.id.date);
         img_refresh = (ImageView) findViewById(R.id.refresh);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         CircleImageView img_head_menu = (CircleImageView) findViewById(R.id.img_head_menu);
 
         time_1 = (TextView) findViewById(R.id.time_1);
@@ -447,6 +461,29 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
                 getWeatherInfo = new GetWeatherInfo(handler);
                 getWeatherInfo.getWeatherCode(city_code);
             }
+    }
+
+    @Override
+    public void onRefresh()
+    {
+        if (!isRefresh)
+        {
+            isRefresh = true;
+            new Handler().postDelayed(new Runnable()
+            {
+                public void run()
+                {
+                    SharedPreferences sharedPreferences = getSharedPreferences("weather_temp", MODE_PRIVATE);
+                    GetTemp getTemp = new GetTemp(sharedPreferences);
+                    String city_code = findCityCode.Find_Code(MainActivity.this, getTemp.getDistrict());
+                    getWeatherInfo = new GetWeatherInfo(handler);
+                    getWeatherInfo.getWeatherCode(city_code);
+                    Message message = new Message();
+                    message.what = REFRESH;
+                    handler.sendMessage(message);
+                }
+            }, 3000);
+        }
     }
 }
 
