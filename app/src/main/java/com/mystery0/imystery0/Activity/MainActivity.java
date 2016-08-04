@@ -100,8 +100,11 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             switch (msg.what)
             {
                 case REFRESH:
-                    swipeRefreshLayout.setRefreshing(false);
-                    isRefresh = false;
+                    if (swipeRefreshLayout.isRefreshing())
+                    {
+                        swipeRefreshLayout.setRefreshing(false);
+                        isRefresh = false;
+                    }
                     Toast.makeText(MainActivity.this, "刷新成功!", Toast.LENGTH_SHORT).show();
                     break;
 
@@ -246,11 +249,11 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         img_refresh.setOnClickListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
         //加载颜色是循环播放的，只要没有完成刷新就会一直循环，color1>color2>color3>color4
-        swipeRefreshLayout.setColorScheme(
-                getResources().getColor(android.R.color.white),
-                getResources().getColor(android.R.color.holo_green_light),
-                getResources().getColor(android.R.color.holo_orange_light),
-                getResources().getColor(android.R.color.holo_red_light)
+        swipeRefreshLayout.setColorSchemeResources(
+                android.R.color.white,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
         );
     }
 
