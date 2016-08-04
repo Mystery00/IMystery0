@@ -54,7 +54,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
     private TextView title;
     private TextView date;
     private ImageView img_code;
-    private ImageView img_refresh;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     private static final int REQUEST = 3;
@@ -246,15 +245,13 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
          */
         title.setOnClickListener(this);
         listView.setOnItemClickListener(this);
-        img_refresh.setOnClickListener(this);
-        swipeRefreshLayout.setOnRefreshListener(this);
-        //加载颜色是循环播放的，只要没有完成刷新就会一直循环，color1>color2>color3>color4
         swipeRefreshLayout.setColorSchemeResources(
-                android.R.color.white,
+                android.R.color.holo_blue_light,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light
         );
+        swipeRefreshLayout.setOnRefreshListener(this);
     }
 
     /**
@@ -277,7 +274,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
         listView = (ListView) findViewById(R.id.list_left_drawer);
         title = (TextView) findViewById(R.id.location);
         date = (TextView) findViewById(R.id.date);
-        img_refresh = (ImageView) findViewById(R.id.refresh);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
         CircleImageView img_head_menu = (CircleImageView) findViewById(R.id.img_head_menu);
 
@@ -410,16 +406,6 @@ public class MainActivity extends Activity implements View.OnClickListener, ILoc
             case R.id.location:
                 Intent intent = new Intent(MainActivity.this, List_ProvinceActivity.class);
                 startActivityForResult(intent, REQUEST);
-                break;
-            case R.id.refresh:
-                SharedPreferences sharedPreferences = getSharedPreferences("weather_temp", MODE_PRIVATE);
-                GetTemp getTemp = new GetTemp(sharedPreferences);
-                String city_code = findCityCode.Find_Code(this.getApplicationContext(), getTemp.getDistrict());
-                getWeatherInfo = new GetWeatherInfo(handler);
-                getWeatherInfo.getWeatherCode(city_code);
-                Message message = new Message();
-                message.what = REFRESH;
-                handler.sendMessage(message);
                 break;
         }
     }
